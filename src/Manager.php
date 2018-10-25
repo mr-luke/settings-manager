@@ -83,7 +83,7 @@ class Manager
         $class = $driverConfig['class'];
         unset($driverConfig['class']);
 
-        $this->bags[$name] = new SettingsBag($class::createInstance($driverConfig, $bagConfig), $name);
+        $this->bags[$name] = new SettingsBag(new $class($driverConfig, $name, $bagConfig), $name);
 
         return $this->bags[$name];
     }

@@ -4,8 +4,9 @@ namespace Mrluke\Drivers;
 
 use InvalidArgumentException;
 use Illuminate\Support\Facades\DB;
-use Mrluke\Settings\Caster;
-use Mrluke\Settings\Contracts\Driver;
+use Mrluke\Settings\Concerns\Cachable;
+use Mrluke\Settings\Concerns\Castable;
+use Mrluke\Settings\Contracts\Cachable as CachableContract;
 
 /**
  * Database driver for SettingsManager.
@@ -16,30 +17,9 @@ use Mrluke\Settings\Contracts\Driver;
  *
  * @license   MIT
  */
-class Database implements Driver
+class Database extends Driver implements CachableContract
 {
-    use Caster;
-
-    /**
-     * Determine if Cache is enabled.
-     *
-     * @var boolean
-     */
-    protected $cache;
-
-    /**
-     * Configuration for driver.
-     *
-     * @var array
-     */
-    protected $config;
-
-    /**
-     * Lifetime of cache in minutes.
-     *
-     * @var int
-     */
-    protected $lifetime;
+    use Cachable, Castable;
 
     /**
      * Raw data loaded from storage.
@@ -48,29 +28,15 @@ class Database implements Driver
      */
     protected $raw;
 
-    function __construct(array $config, bool $cache, int $lifetime)
-    {
-        $this->config = $config;
-        $this->cache = $cache;
-        $this->lifetime = $lifetime;
-    }
-
-    /**
-     * Creates instance of Driver.
-     *
-     * @param  array $config
-     * @param  array $bag
-     * @return Mrluke\Settings\Contracts\Driver
-     *
-     * @throws InvalidArgumentException
-     */
-    public static createInstance(array $config, array $bag) : Driver
+    function __construct(array $config, string $bagName ,array $bagConfig)
     {
         if (array_keys($config) != ['connection', 'table']) {
             throw new InvalidArgumentException('Driver Database is not configurated properly.');
         }
 
-        return new static($config, $bag['cache'], $bag['lifetime']);
+        $this->setCache($bagConfig);
+
+        parent::__construct($config, $bagName);
     }
 
     /**
@@ -81,7 +47,11 @@ class Database implements Driver
      */
     public function delete(string $key) : void
     {
+        $this->fireForgetingEvent($key);
 
+        $this->getQuery()->where('key', $key)->delete();
+
+        $this->fireForgotEvent($key);
     }
 
     /**
@@ -91,20 +61,45 @@ class Database implements Driver
      */
     public function fetch() : self
     {
-        $this->raw = $this->getQuery()->get();
+        $this->fireLoadingEvent();
+
+        if ($this->isCacheEnabled()) {
+            $object = $this;
+
+            $this->raw = $this->getFromCache(function() use ($object) {
+                return $object->getQuery()->get();
+            });
+        } else {
+            $this->raw = $this->getQuery()->get();
+        }
+
+        $this->fireLoadedEvent();
     }
 
     /**
      * Insert new key.
      *
-     * @param  string      $key
-     * @param  mixed       $value
-     * @param  string|null $type
+     * @param  string $key
+     * @param  mixed  $value
+     * @param  string $type
      * @return mixed
      */
-    public function insert(string $key, $value, string $type = null)
+    public function insert(string $key, $value, string $type)
     {
+        $this->fireRegisteringEvent($key);
 
+        $value = $this->castToType($value, $type);
+
+        $this->getRawQuery()->insert([
+            'bag' => $this->bag,
+            'key' => $key,
+            'type' => $type,
+            'value' => is_array($value) ? json_encode($value, JSON_UNESCAPED_UNICODE) : $value,
+        ]);
+
+        $this->fireRegisteredEvent($key, $value);
+
+        return $value;
     }
 
     /**
@@ -117,7 +112,7 @@ class Database implements Driver
         $object = $this;
 
         return $this->raw->flatMap(function($item) use ($object) {
-            return [$item->key => $this->cast($item->value, $item->type)];
+            return [$item->key => $this->castToType($item->value, $item->type)];
         })->toArray();
     }
 
@@ -130,17 +125,28 @@ class Database implements Driver
      */
     public function update(string $key, $value)
     {
+        $this->fireUpdatingEvent($key);
 
+        $type = $this->raw->where('key', $key)->type;
+        $value = $this->castToType($value, $type);
+
+        $this->getQuery()->where('key', $key)->update([
+            'value' => is_array($value) ? json_encode($value, JSON_UNESCAPED_UNICODE) : $value,
+        ]);
+
+        $this->fireUpdatedEvent($key, $value);
+
+        return $value;
     }
 
     /**
-     * Return cahce lifetime in minutes.
+     * Return QueryBuilder for a settings table.
      *
-     * @return int
+     * @return Illuminate\Database\Builder
      */
-    protected function getCacheLifetime() : int
+    protected function getRawQuery()
     {
-
+        return DB::connection($this->config['connection'])->table($this->config['table']);
     }
 
     /**
@@ -150,16 +156,6 @@ class Database implements Driver
      */
     protected function getQuery()
     {
-        return DB::connection($this->config['connection'])->table($this->config['table']);
-    }
-
-    /**
-     * Determine if cache option is enabled.
-     *
-     * @return bool
-     */
-    protected function isCacheEnabled() : bool
-    {
-
+        return $this->getRawQuery()->where('bag', $this->bag);
     }
 }

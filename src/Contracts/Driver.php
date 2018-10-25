@@ -14,16 +14,6 @@ namespace Mrluke\Settings\Contracts;
 interface Driver
 {
     /**
-     * Creates instance of Driver.
-     *
-     * @param  array $config
-     * @return Mrluke\Settings\Contracts\Driver
-     *
-     * @throws InvalidArgumentException
-     */
-    public static function createInstance(array $config) : Driver;
-
-    /**
      * Delete given key.
      *
      * @param  string $key
@@ -63,27 +53,4 @@ interface Driver
      * @return mixed
      */
     public function update(string $key, $value);
-
-    /**
-     * Cast given value to given type.
-     *
-     * @param  mixed  $value
-     * @param  string $type
-     * @return mixed
-     */
-    protected function cast($value, string $type);
-
-    /**
-     * Return cahce lifetime in minutes.
-     *
-     * @return int
-     */
-    protected function getCacheLifetime() : int;
-
-    /**
-     * Determine if cache option is enabled.
-     *
-     * @return bool
-     */
-    protected function isCacheEnabled() : bool;
 }
