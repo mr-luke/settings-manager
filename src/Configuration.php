@@ -22,7 +22,7 @@ final class Configuration implements ArrayHost
      */
     protected $config;
 
-    function __construct($insert)
+    public function __construct($insert)
     {
         $this->config = $insert;
     }
@@ -30,8 +30,9 @@ final class Configuration implements ArrayHost
     /**
      * Return given key from array.
      *
-     * @param  string $key
-     * @param  mixed  $default
+     * @param string $key
+     * @param mixed  $default
+     *
      * @return mixed
      */
     public function get(string $key, $default = null)
@@ -44,8 +45,9 @@ final class Configuration implements ArrayHost
     /**
      * Return of givent key is present.
      *
-     * @param  string $key
-     * @return boolean
+     * @param string $key
+     *
+     * @return bool
      */
     public function has(string $key) : bool
     {
@@ -57,7 +59,8 @@ final class Configuration implements ArrayHost
     /**
      * Magic getter.
      *
-     * @param  string $key
+     * @param string $key
+     *
      * @return mixed
      */
     public function __get(string $key)
@@ -68,7 +71,8 @@ final class Configuration implements ArrayHost
     /**
      * Iterate through configuration.
      *
-     * @param  string $key
+     * @param string $key
+     *
      * @return mixed
      */
     protected function iterateConfig(string $key)
@@ -76,7 +80,9 @@ final class Configuration implements ArrayHost
         $result = $this->config;
 
         foreach (explode('.', $key) as $p) {
-            if (!isset($result[$p])) return null;
+            if (!isset($result[$p])) {
+                return;
+            }
             $result = $result[$p];
         }
 

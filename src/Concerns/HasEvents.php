@@ -4,8 +4,8 @@ namespace Mrluke\Settings\Concerns;
 
 use Mrluke\Settings\Events\Forgeting;
 use Mrluke\Settings\Events\Forgot;
-use Mrluke\Settings\Events\Loading;
 use Mrluke\Settings\Events\Loaded;
+use Mrluke\Settings\Events\Loading;
 use Mrluke\Settings\Events\Registered;
 use Mrluke\Settings\Events\Registering;
 use Mrluke\Settings\Events\Updated;
@@ -16,7 +16,6 @@ use Mrluke\Settings\Events\Updating;
  * to fire settings events.
  *
  * @author    Łukasz Sitnicki (mr-luke)
- *
  * @license   MIT
  */
 trait HasEvents
@@ -24,7 +23,8 @@ trait HasEvents
     /**
      * Fire event Loading.
      *
-     * @param  string $key
+     * @param string $key
+     *
      * @return void
      */
     protected function fireForgetingEvent(string $key) : void
@@ -35,7 +35,8 @@ trait HasEvents
     /**
      * Fire event Loaded.
      *
-     * @param  string $key
+     * @param string $key
+     *
      * @return void
      */
     protected function fireForgotEvent(string $key) : void
@@ -66,8 +67,9 @@ trait HasEvents
     /**
      * Fire event Registered.
      *
-     * @param  string $key
-     * @param  mixed  $value
+     * @param string $key
+     * @param mixed  $value
+     *
      * @return void
      */
     protected function fireRegisteredEvent(string $key, $value) : void
@@ -78,7 +80,8 @@ trait HasEvents
     /**
      * Fire event Registering.
      *
-     * @param  string $key
+     * @param string $key
+     *
      * @return void
      */
     protected function fireRegisteringEvent(string $key) : void
@@ -89,8 +92,9 @@ trait HasEvents
     /**
      * Fire event Updated.
      *
-     * @param  string $key
-     * @param  mixed  $value
+     * @param string $key
+     * @param mixed  $value
+     *
      * @return void
      */
     protected function fireUpdatedEvent(string $key, $value) : void
@@ -101,7 +105,8 @@ trait HasEvents
     /**
      * Fire event Updating.
      *
-     * @param  string $key
+     * @param string $key
+     *
      * @return void
      */
     protected function fireUpdatingEvent(string $key) : void

@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Cache;
  * to cache bag.
  *
  * @author    Łukasz Sitnicki (mr-luke)
- *
  * @license   MIT
  */
 trait Cachable
@@ -18,7 +17,7 @@ trait Cachable
     /**
      * Determine if Cache is enabled.
      *
-     * @var boolean
+     * @var bool
      */
     protected $cache;
 
@@ -67,7 +66,8 @@ trait Cachable
     /**
      * Return settings from cache.
      *
-     * @param  Closure $callable
+     * @param Closure $callable
+     *
      * @return \Illuminate\Support\Collection
      */
     public function getFromCache(Closure $callable)
@@ -88,7 +88,8 @@ trait Cachable
     /**
      * Set cache attributes.
      *
-     * @param  array $config
+     * @param array $config
+     *
      * @return void
      */
     public function setCache(array $config) : void
