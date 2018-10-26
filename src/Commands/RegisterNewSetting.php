@@ -3,7 +3,6 @@
 namespace Mrluke\Settings\Commands;
 
 use Illuminate\Console\Command;
-
 use Mrluke\Settings\Manager;
 
 class RegisterNewSetting extends Command
@@ -55,17 +54,21 @@ class RegisterNewSetting extends Command
             $this->info('There is no type set (Allowed: boolean, float, integer, array, string).');
             $type = $this->ask('What kind of setting do you want to register? Leave empty to autodetect.');
 
-            if (is_null($type)) $type = null;
+            if (is_null($type)) {
+                $type = null;
+            }
         }
 
-        if ($type == 'array') $this->info('You set type as array. Stringified JSON required as value!');
+        if ($type == 'array') {
+            $this->info('You set type as array. Stringified JSON required as value!');
+        }
         $value = $this->ask('What is a value of your key?');
 
         $this->info('Registering new setting...'."\n");
 
-        $this->line('Key: '. $key);
-        $this->line('Value: '. $value);
-        $this->line('Type: '. (is_null($type) ? 'autodetect' : $type));
+        $this->line('Key: '.$key);
+        $this->line('Value: '.$value);
+        $this->line('Type: '.(is_null($type) ? 'autodetect' : $type));
 
         if ($this->manager->get($key)) {
             $res = $this->manager->set($key, $value);

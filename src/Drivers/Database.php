@@ -2,8 +2,8 @@
 
 namespace Mrluke\Settings\Drivers;
 
-use InvalidArgumentException;
 use Illuminate\Support\Facades\DB;
+use InvalidArgumentException;
 use Mrluke\Settings\Concerns\Cachable;
 use Mrluke\Settings\Concerns\Castable;
 use Mrluke\Settings\Contracts\Cachable as CachableContract;
@@ -28,7 +28,7 @@ class Database extends Driver implements CachableContract
      */
     protected $raw;
 
-    function __construct(array $config, string $bagName ,array $bagConfig)
+    public function __construct(array $config, string $bagName, array $bagConfig)
     {
         if (array_keys($config) != ['connection', 'table']) {
             throw new InvalidArgumentException('Driver Database is not configurated properly.');
@@ -42,7 +42,8 @@ class Database extends Driver implements CachableContract
     /**
      * Delete given key.
      *
-     * @param  string $key
+     * @param string $key
+     *
      * @return void
      */
     public function delete(string $key) : void
@@ -66,7 +67,7 @@ class Database extends Driver implements CachableContract
         if ($this->isCacheEnabled()) {
             $object = $this;
 
-            $this->raw = $this->getFromCache(function() use ($object) {
+            $this->raw = $this->getFromCache(function () use ($object) {
                 return $object->getQuery()->get();
             });
         } else {
@@ -81,9 +82,10 @@ class Database extends Driver implements CachableContract
     /**
      * Insert new key.
      *
-     * @param  string $key
-     * @param  mixed  $value
-     * @param  string $type
+     * @param string $key
+     * @param mixed  $value
+     * @param string $type
+     *
      * @return mixed
      */
     public function insert(string $key, $value, string $type)
@@ -93,19 +95,21 @@ class Database extends Driver implements CachableContract
         $value = $this->castToType($value, $type);
 
         $this->getRawQuery()->insert([
-            'bag' => $this->bag,
-            'key' => $key,
-            'type' => $type,
+            'bag'   => $this->bag,
+            'key'   => $key,
+            'type'  => $type,
             'value' => is_array($value) ? json_encode($value, JSON_UNESCAPED_UNICODE) : $value,
         ]);
 
-        if (empty($this->raw)) $this->raw = collect();
+        if (empty($this->raw)) {
+            $this->raw = collect();
+        }
 
         $this->raw->push([
-            'bag' => $this->bag,
-            'key' => $key,
-            'type' => $type,
-            'value' => $value
+            'bag'   => $this->bag,
+            'key'   => $key,
+            'type'  => $type,
+            'value' => $value,
         ]);
 
         $this->fireRegisteredEvent($key, $value);
@@ -116,8 +120,9 @@ class Database extends Driver implements CachableContract
     /**
      * Update given key.
      *
-     * @param  string $key
-     * @param  mixed  $value
+     * @param string $key
+     * @param mixed  $value
+     *
      * @return mixed
      */
     public function update(string $key, $value)
@@ -165,7 +170,7 @@ class Database extends Driver implements CachableContract
     {
         $object = $this;
 
-        return $this->raw->flatMap(function($item) use ($object) {
+        return $this->raw->flatMap(function ($item) use ($object) {
             return [$item->key => $this->castToType($item->value, $item->type)];
         })->toArray();
     }

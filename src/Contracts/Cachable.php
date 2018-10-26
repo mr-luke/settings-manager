@@ -39,7 +39,8 @@ interface Cachable
     /**
      * Return settings from cache.
      *
-     * @param  Closure $callable
+     * @param Closure $callable
+     *
      * @return \Illuminate\Support\Collection
      */
     public function getFromCache(Closure $callable);

@@ -10,6 +10,7 @@ namespace Mrluke\Settings\Contracts;
  * @link      http://github.com/mr-luke/settings-manager
  *
  * @category  Laravel
+ *
  * @license   MIT
  */
 interface ArrayHost
@@ -17,8 +18,9 @@ interface ArrayHost
     /**
      * Return given key from array.
      *
-     * @param  string $key
-     * @param  mixed  $default
+     * @param string $key
+     * @param mixed  $default
+     *
      * @return mixed
      */
     public function get(string $key, $default = null);
@@ -26,15 +28,17 @@ interface ArrayHost
     /**
      * Return of givent key is present.
      *
-     * @param  string $key
-     * @return boolean
+     * @param string $key
+     *
+     * @return bool
      */
     public function has(string $key) : bool;
 
     /**
      * Magic getter.
      *
-     * @param  string $key
+     * @param string $key
+     *
      * @return mixed
      */
     public function __get(string $key);

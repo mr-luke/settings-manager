@@ -7,7 +7,6 @@ namespace Mrluke\Settings\Concerns;
  * to cast attributes.
  *
  * @author    Łukasz Sitnicki (mr-luke)
- *
  * @license   MIT
  */
 trait Castable
@@ -15,8 +14,9 @@ trait Castable
     /**
      * Cast given value to given type.
      *
-     * @param  mixed  $value
-     * @param  string $type
+     * @param mixed  $value
+     * @param string $type
+     *
      * @return mixed
      */
     protected function castToType($value, string $type)
@@ -40,18 +40,21 @@ trait Castable
                 return (string) $value;
 
         }
+
         return $value;
     }
 
     /**
      * Determine if given value is json type.
      *
-     * @param  mixed $value
+     * @param mixed $value
+     *
      * @return bool
      */
     protected function is_json($value) : bool
     {
         json_decode($value);
-        return (json_last_error() == JSON_ERROR_NONE);
+
+        return json_last_error() == JSON_ERROR_NONE;
     }
 }

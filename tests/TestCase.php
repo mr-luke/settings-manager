@@ -5,15 +5,15 @@ namespace Mrluke\Settings\Tests;
 use Mrluke\Settings\Configuration;
 use Orchestra\Testbench\TestCase as BaseCase;
 
- /**
-  * TestsBase - phpunit master file for this package.
-  *
-  * @author    Łukasz Sitnicki (mr-luke)
-  *
-  * @link      http://github.com/mr-luke/settings-manager
-  *
-  * @license   MIT
-  */
+/**
+ * TestsBase - phpunit master file for this package.
+ *
+ * @author    Łukasz Sitnicki (mr-luke)
+ *
+ * @link      http://github.com/mr-luke/settings-manager
+ *
+ * @license   MIT
+ */
 class TestCase extends BaseCase
 {
     /**
@@ -91,17 +91,17 @@ class TestCase extends BaseCase
                 'database' => [
                     'driver'   => 'database',
                     'cache'    => false,
-                    'lifetime' => null
+                    'lifetime' => null,
                 ],
                 'other' => [
                     'driver'   => 'database',
                     'cache'    => false,
-                    'lifetime' => null
+                    'lifetime' => null,
                 ],
                 'json'    => [
                      'driver'   => 'json',
                      'cache'    => false,
-                     'lifetime' => null
+                     'lifetime' => null,
                 ],
             ],
             'drivers' => [
@@ -114,7 +114,7 @@ class TestCase extends BaseCase
                     'class' => \Mrluke\Settings\Drivers\Json::class,
                     'path'  => __DIR__.'/storage/',
                     'file'  => 'settings.json',
-                ]
+                ],
             ],
         ];
 
