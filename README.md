@@ -4,7 +4,7 @@ Settings Manager - Laravel multibag settings Package.
 [![Latest Stable Version](https://poser.pugx.org/mr-luke/settings-manager/v/stable)](https://packagist.org/packages/mr-luke/settings-manager)
 [![Total Downloads](https://poser.pugx.org/mr-luke/settings-manager/downloads)](https://packagist.org/packages/mr-luke/settings-manager)
 [![License](https://poser.pugx.org/mr-luke/settings-manager/license)](https://packagist.org/packages/mr-luke/settings-manager)
-![StyleCI](https://github.styleci.io/repos/153353559/shield?branch=master)
+[![StyleCI](https://github.styleci.io/repos/154651015/shield?branch=master)](https://github.styleci.io/repos/154651015)
 
 This package provides settings manager that supports multiple setting bags with typed value.
 
