@@ -63,9 +63,9 @@ You can setup different database connections or tables by new `driver` in:
 'drivers' => [
 	'database' => [
 	    'class'      => \Mrluke\Settings\Drivers\Database::class,
-        'connection' => 'mysql',
-        'table'      => 'settings',
-   ],     
+	    'connection' => 'mysql',
+	    'table'      => 'settings',
+	 ],     
 ],
 ``` 
 
