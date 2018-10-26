@@ -1,6 +1,6 @@
 <?php
 
-namespace Mrluke\Drivers;
+namespace Mrluke\Settings\Drivers;
 
 use InvalidArgumentException;
 use Illuminate\Support\Facades\DB;
@@ -55,13 +55,15 @@ class Json extends Driver
      *
      * @return self
      */
-    public function fetch() : self
+    public function fetch() : array
     {
         $this->fireLoadingEvent();
 
         // TODO
 
         $this->fireLoadedEvent();
+
+        return [];
     }
 
     /**
@@ -81,16 +83,6 @@ class Json extends Driver
         $this->fireRegisteredEvent($key, $value);
 
         return $value;
-    }
-
-    /**
-     * Parse Raw data to asoc array.
-     *
-     * @return array
-     */
-    public function parse() : array
-    {
-        // TODO
     }
 
     /**
