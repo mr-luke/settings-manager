@@ -6,7 +6,7 @@ Settings Manager - Laravel multibag settings Package.
 [![License](https://poser.pugx.org/mr-luke/settings-manager/license)](https://packagist.org/packages/mr-luke/settings-manager)
 ![StyleCI](https://github.styleci.io/repos/153353559/shield?branch=master)
 
-This package provides settings manager that supports multiple setting bags.
+This package provides settings manager that supports multiple setting bags with typed value.
 
 * [Getting Started](#getting-started)
 * [Installation](#installation)
@@ -16,7 +16,8 @@ This package provides settings manager that supports multiple setting bags.
 
 ## Getting Started
 
-Setting Manager has been developed using Laravel 5.5. It's recommended to test it out before using with previous versions. PHP >= 7.1.3 is required.
+Setting Manager has been developed using `Laravel 5.5`
+It's recommended to test it out before using with previous versions. PHP >= 7.1.3 is required.
 
 ## Installation
 
@@ -40,25 +41,121 @@ Next, add the service provider to `app/config/app.php`
 ```
 Mrluke\Settings\SettingsServiceProvider::class,
 ```
+*Note: Package is auto-discoverable!*
 
 ## Configuration
 
-You can see the options for further customization in the [config file](config/settings-manager.php).
+To use `SettingsManager` you need to setup your `Bags` first. Add your own one to the [config file](config/settings-manager.php) `bags`:
 
-You can also publish config file
+```php
+'bags' => [
+	'general' => [ // Given key is used as a Bag name
+	    'driver'   => 'database', // One of available drivers
+	    'cache'    => true, // Should be Cached
+	    'lifetime' => 60 // Cache lifetime in minutes
+	],
+],
+```
+
+You can setup different database connections or tables by new `driver` in:
+
+```php
+'drivers' => [
+	'database' => [
+	    'class'      => \Mrluke\Settings\Drivers\Database::class,
+        'connection' => 'mysql',
+        'table'      => 'settings',
+   ],     
+],
+``` 
+
+You can also publish config file via command:
 ```bash
 php artisan vendor:publish
 ```
 
 ## Usage
 
-### Configuration
+### Facade
 
-To use `Manager` you need to setup your Bags.
+You can access to `Manager` and your `Bags` using `Mrluke\Settings\Facades\Settings`.
 
-### Accessing Bag
+### Type
 
-To access specific `Mrluke\Settings\Contracts\Bag` use method **`bag(string $name)`** 
+`SettingsManager` is a type casted tool that care about it during the whole process. 
+
+Example: *You can pass `string 5.567` to `set` method for `ratio` setting (`float`) and `SettingsManager` will cast the value to `float 5.567` behind the scean.* 
+
+Whereever you ask for certain key, it will always be correct type. But all begins at the point of `registering`...
+
+### Registering new index
+
+To register new value use:
+```php
+$value = Settings::register(string $key, $value, string $type);
+``` 
+This method returns given `$value` casted to given `$type`.
+
+### Accessing index
+
+To get value use:
+```php
+$value = Settings::get(string $key, $default = null);
+``` 
+This method returns `$default` in case given `$key` is not present in the `Bag`. Otherwise `$value` is casted to registered `type`.
+
+### Setting new value of index
+
+To set new value use:
+```php
+$value = Settings::set(string $key, $value);
+``` 
+This method returns `$value` casted to registered `type`. If given `$key` is not present, it will automaticaly call `register` method with auto-detected `type`.
+
+*This method shoud not be use to register settings in general! Use `Eventing` to detect all needed settings during development.* 
+
+### Forgeting  an index
+
+To forget an index use:
+```php
+Settings::forget(string $key);
+``` 
+
+### Default `Bag` vs specified
+
+To access specific `Bag` use bag accessor method:
+ ```php
+$value = Settings::bag(string $name)->get(string $key, $default = null);
+``` 
+
+### Helper
+
+You can access to `SettingsManager` via helper function:
+```php
+// Get index 
+settings(string $key);
+// Set value
+settings([string $key => $value]);
+// Get instance and perform action
+settings()->forget(string $key);
+```
+
+### Events
+
+`SettingsManager` provides you a list of `pre` and `post` action events to help you handle different situations. 
+
+Example: *You can use `Mrluke\Settings\Events\Registered` event to prepare full list of production settings.*
+
+Namespace `Mrluke\Settings\Events`:
+
+* `Forgeting`
+* `Forgot`
+* `Loading`
+* `Loaded`
+* `Registering`
+* `Registered`
+* `Updating`
+* `Updated`
 
 ## Plans
 
