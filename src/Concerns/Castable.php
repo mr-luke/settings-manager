@@ -35,7 +35,7 @@ trait Castable
             case 'integer':
                 return (int) $value;
             case 'json':
-                return is_json($value) ? $value : json_encode($value, JSON_UNESCAPED_UNICODE);
+                return $this->is_json($value) ? $value : json_encode($value, JSON_UNESCAPED_UNICODE);
             case 'string':
                 return (string) $value;
 

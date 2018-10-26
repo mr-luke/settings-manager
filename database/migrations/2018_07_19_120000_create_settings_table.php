@@ -17,7 +17,7 @@ class CreateSettingsTable extends Migration
             $table->increments('id');
             $table->string('bag', 100);
             $table->string('key');
-            $table->enum('type', ['array', 'boolean', 'float', 'integer', 'json', 'string'])->default('string');
+            $table->enum('type', ['array', 'bool', 'float', 'integer', 'json', 'string'])->default('string');
             $table->text('value');
         });
     }

@@ -24,26 +24,19 @@ interface Driver
     /**
      * Load Raw data from storage.
      *
-     * @return self
+     * @return array
      */
-    public function fetch() : self;
+    public function fetch() : array;
 
     /**
      * Insert new key.
      *
-     * @param  string      $key
-     * @param  mixed       $value
-     * @param  string|null $type
+     * @param  string $key
+     * @param  mixed  $value
+     * @param  string $type
      * @return mixed
      */
-    public function insert(string $key, $value, string $type = null);
-
-    /**
-     * Parse Raw data to asoc array.
-     *
-     * @return array
-     */
-    public function parse() : array;
+    public function insert(string $key, $value, string $type);
 
     /**
      * Update given key.

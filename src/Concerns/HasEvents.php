@@ -29,7 +29,7 @@ trait HasEvents
      */
     protected function fireForgetingEvent(string $key) : void
     {
-        event(new Forgeting(get_class($this)), $this->bag, $key);
+        event(new Forgeting(get_class($this), $this->bag, $key));
     }
 
     /**
@@ -40,7 +40,7 @@ trait HasEvents
      */
     protected function fireForgotEvent(string $key) : void
     {
-        event(new Forgot(get_class($this)), $this->bag, $key);
+        event(new Forgot(get_class($this), $this->bag, $key));
     }
 
     /**
@@ -50,7 +50,7 @@ trait HasEvents
      */
     protected function fireLoadingEvent() : void
     {
-        event(new Loading(get_class($this)), $this->bag);
+        event(new Loading(get_class($this), $this->bag));
     }
 
     /**
@@ -60,7 +60,7 @@ trait HasEvents
      */
     protected function fireLoadedEvent() : void
     {
-        event(new Loaded(get_class($this)), $this->bag);
+        event(new Loaded(get_class($this), $this->bag));
     }
 
     /**
@@ -72,7 +72,7 @@ trait HasEvents
      */
     protected function fireRegisteredEvent(string $key, $value) : void
     {
-        event(new Registering(get_class($this)), $this->bag, $key, $value);
+        event(new Registered(get_class($this), $this->bag, $key, $value));
     }
 
     /**
@@ -83,7 +83,7 @@ trait HasEvents
      */
     protected function fireRegisteringEvent(string $key) : void
     {
-        event(new Registering(get_class($this)), $this->bag, $key);
+        event(new Registering(get_class($this), $this->bag, $key));
     }
 
     /**
@@ -95,7 +95,7 @@ trait HasEvents
      */
     protected function fireUpdatedEvent(string $key, $value) : void
     {
-        event(new Updated(get_class($this)), $this->bag, $key, $value);
+        event(new Updated(get_class($this), $this->bag, $key, $value));
     }
 
     /**
@@ -106,6 +106,6 @@ trait HasEvents
      */
     protected function fireUpdatingEvent(string $key) : void
     {
-        event(new Updating(get_class($this)), $this->bag, $key);
+        event(new Updating(get_class($this), $this->bag, $key));
     }
 }

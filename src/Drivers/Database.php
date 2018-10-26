@@ -1,6 +1,6 @@
 <?php
 
-namespace Mrluke\Drivers;
+namespace Mrluke\Settings\Drivers;
 
 use InvalidArgumentException;
 use Illuminate\Support\Facades\DB;
@@ -57,9 +57,9 @@ class Database extends Driver implements CachableContract
     /**
      * Load Raw data from storage.
      *
-     * @return self
+     * @return array
      */
-    public function fetch() : self
+    public function fetch() : array
     {
         $this->fireLoadingEvent();
 
@@ -74,6 +74,8 @@ class Database extends Driver implements CachableContract
         }
 
         $this->fireLoadedEvent();
+
+        return $this->parse();
     }
 
     /**
@@ -97,23 +99,18 @@ class Database extends Driver implements CachableContract
             'value' => is_array($value) ? json_encode($value, JSON_UNESCAPED_UNICODE) : $value,
         ]);
 
+        if (empty($this->raw)) $this->raw = collect();
+
+        $this->raw->push([
+            'bag' => $this->bag,
+            'key' => $key,
+            'type' => $type,
+            'value' => $value
+        ]);
+
         $this->fireRegisteredEvent($key, $value);
 
         return $value;
-    }
-
-    /**
-     * Parse Raw data to asoc array.
-     *
-     * @return array
-     */
-    public function parse() : array
-    {
-        $object = $this;
-
-        return $this->raw->flatMap(function($item) use ($object) {
-            return [$item->key => $this->castToType($item->value, $item->type)];
-        })->toArray();
     }
 
     /**
@@ -127,7 +124,7 @@ class Database extends Driver implements CachableContract
     {
         $this->fireUpdatingEvent($key);
 
-        $type = $this->raw->where('key', $key)->type;
+        $type = $this->raw->where('key', $key)->first()['type'];
         $value = $this->castToType($value, $type);
 
         $this->getQuery()->where('key', $key)->update([
@@ -157,5 +154,19 @@ class Database extends Driver implements CachableContract
     protected function getQuery()
     {
         return $this->getRawQuery()->where('bag', $this->bag);
+    }
+
+    /**
+     * Parse Raw data to asoc array.
+     *
+     * @return array
+     */
+    protected function parse() : array
+    {
+        $object = $this;
+
+        return $this->raw->flatMap(function($item) use ($object) {
+            return [$item->key => $this->castToType($item->value, $item->type)];
+        })->toArray();
     }
 }

@@ -34,7 +34,7 @@ trait Cachable
      *
      * @return void
      */
-    protected function flushCache() : void
+    public function flushCache() : void
     {
         if ($this->isCacheEnabled()) {
             Cache::forget($this->getCacheIdentifier());
@@ -46,7 +46,7 @@ trait Cachable
      *
      * @return string
      */
-    protected function getCacheIdentifier() : string
+    public function getCacheIdentifier() : string
     {
         $class = explode('\\', get_class($this));
         $class = end($class);
@@ -59,7 +59,7 @@ trait Cachable
      *
      * @return int
      */
-    protected function getCacheLifetime() : int
+    public function getCacheLifetime() : int
     {
         return (int) $this->lifetime;
     }
@@ -70,7 +70,7 @@ trait Cachable
      * @param  Closure $callable
      * @return \Illuminate\Support\Collection
      */
-    protected function getFromCache(Closure $callable)
+    public function getFromCache(Closure $callable)
     {
         return Cache::remember($this->getCacheIdentifier(), $this->getCacheLifetime(), $callable);
     }
@@ -80,7 +80,7 @@ trait Cachable
      *
      * @return bool
      */
-    protected function isCacheEnabled() : bool
+    public function isCacheEnabled() : bool
     {
         return (bool) $this->cache;
     }
@@ -91,7 +91,7 @@ trait Cachable
      * @param  array $config
      * @return void
      */
-    protected function setCache(array $config) : void
+    public function setCache(array $config) : void
     {
         $this->cache = $config['cache'];
         $this->lifetime = $config['lifetime'];

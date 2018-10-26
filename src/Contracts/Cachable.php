@@ -2,6 +2,8 @@
 
 namespace Mrluke\Settings\Contracts;
 
+use Closure;
+
 /**
  * Cachable interface for SettingsManager.
  *
@@ -18,21 +20,21 @@ interface Cachable
      *
      * @return void
      */
-    protected function flushCache() : void;
+    public function flushCache() : void;
 
     /**
      * Return cach identifier name.
      *
      * @return string
      */
-    protected function getCacheIdentifier() : string;
+    public function getCacheIdentifier() : string;
 
     /**
      * Return cahce lifetime in minutes.
      *
      * @return int
      */
-    protected function getCacheLifetime() : int;
+    public function getCacheLifetime() : int;
 
     /**
      * Return settings from cache.
@@ -40,12 +42,12 @@ interface Cachable
      * @param  Closure $callable
      * @return \Illuminate\Support\Collection
      */
-    protected function getFromCache(Closure $callable);
+    public function getFromCache(Closure $callable);
 
     /**
      * Determine if cache option is enabled.
      *
      * @return bool
      */
-    protected function isCacheEnabled() : bool;
+    public function isCacheEnabled() : bool;
 }

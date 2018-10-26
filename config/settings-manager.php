@@ -31,11 +31,6 @@ return [
             'lifetime' => 60
         ],
 
-        // 'layout'    => [
-        //     'driver'   => 'json',
-        //     'cache'    => false,
-        //     'lifetime' => null
-        // ],
     ],
 
     /*
@@ -61,12 +56,7 @@ return [
             'connection' => 'mysql',
             'table'      => 'settings',
         ],
-
-        'json' => [
-            'class' => \Mrluke\Settings\Drivers\Json::class,
-            'path'  => base_path('storage/app/settings/'),
-            'file'  => 'settings.json',
-        ]
+        
     ],
 
 ];

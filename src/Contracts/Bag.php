@@ -47,11 +47,4 @@ interface Bag
      * @param mixed
      */
     public function set(string $key, $value);
-
-    /**
-     * Loads data via driver to bag.
-     *
-     * @return void
-     */
-    protected function load() : void;
 }

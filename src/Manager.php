@@ -56,6 +56,18 @@ class Manager
     }
 
     /**
+     * Return default Bag.
+     *
+     * @param  string $method
+     * @param  array  $parameters
+     * @return mixed
+     */
+    public function __call($method, $parameters)
+    {
+        return $this->bag($this->config->get('default'))->$method(...$parameters);
+    }
+
+    /**
      * Return assign bag with injected Driver.
      *
      * @param  string $name
@@ -70,7 +82,7 @@ class Manager
 
         $bagConfig = $this->config->get('bags.'.$name);
 
-        if (array_keys($bugConfig) != ['driver', 'cache', 'lifetime']) {
+        if (array_keys($bagConfig) != ['driver', 'cache', 'lifetime']) {
             throw new InvalidArgumentException(
                 sprintf('Given %s bag is not configurated properly.', $name)
             );

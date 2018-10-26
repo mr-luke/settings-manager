@@ -4,6 +4,7 @@ namespace Mrluke\Settings;
 
 use InvalidArgumentException;
 use Mrluke\Settings\Contracts\Bag;
+use Mrluke\Settings\Contracts\Driver;
 
 /**
  * SettingsBag is a storage class for settings grouped by specific ID.
@@ -51,7 +52,7 @@ final class SettingsBag implements Bag
      *
      * @var array
      */
-    protected $types = ['array', 'boolean', 'float', 'integer', 'json', 'string'];
+    protected $types = ['array', 'bool', 'boolean', 'double', 'float', 'integer', 'json', 'string'];
 
     function __construct(Driver $driver, string $name)
     {
@@ -69,7 +70,7 @@ final class SettingsBag implements Bag
     {
         unset($this->bag[$key]);
 
-        return $this->driver->delete($key);
+        $this->driver->delete($key);
     }
 
     /**
@@ -101,6 +102,8 @@ final class SettingsBag implements Bag
                 sprintf('Given %s type is not allowed.', $type)
             );
         }
+        if ($type == 'boolean') $type = "bool";
+        if ($type == 'double') $type = "float";
 
         $this->bag[$key] = $this->driver->insert($key, $value, $type);
 
@@ -114,7 +117,7 @@ final class SettingsBag implements Bag
      * @param mixed  $value
      * @param mixed
      */
-    public function set(string $key, $value) // TODO
+    public function set(string $key, $value)
     {
         // In case where not loaded yet.
         if (!$this->loaded) $this->load();
@@ -122,7 +125,7 @@ final class SettingsBag implements Bag
         // If there is no setting yet, register new one
         // with autodetected type.
         if (!isset($this->bag[$key])) {
-            $this->register($key, $value, gettype($value));
+            return $this->register($key, $value, gettype($value));
         }
 
         $this->bag[$key] = $this->driver->update($key, $value);
@@ -137,8 +140,8 @@ final class SettingsBag implements Bag
      */
     protected function load() : void
     {
-        $this->bag = $this->driver->fetch()->parse();
-
+        $this->bag = $this->driver->fetch();
+        
         $this->loaded = true;
     }
 }
