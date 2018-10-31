@@ -159,4 +159,7 @@ Namespace `Mrluke\Settings\Events`:
 
 ## Plans
 
-JSON Driver in progress...
+* JSON Driver (eg. front-end shared configuration)
+* Artisan Commands
+* Blade helpers for `bool` keys
+* Additional option to store `default` value from `get()` method
