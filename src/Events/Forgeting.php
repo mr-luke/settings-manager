@@ -33,9 +33,9 @@ class Forgeting
     /**
      * Create a new event instance.
      *
-     * @param  string $driver
-     * @param  string $bag
-     * @param  string $key
+     * @param string $driver
+     * @param string $bag
+     * @param string $key
      *
      * @return void
      */
