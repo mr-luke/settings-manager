@@ -29,7 +29,7 @@ final class SettingsBag implements Bag
     /**
      * Driver use to interact with settings storage.
      *
-     * @var Mrluke\Settings\Contracts\Driver
+     * @var \Mrluke\Settings\Contracts\Driver
      */
     protected $driver;
 

@@ -16,14 +16,14 @@ if (!function_exists('settings')) {
             return app('mrluke-settings-manager');
         } elseif (is_string($key)) {
             // You will get setting option with default fallback.
-            return \Mrluke\Settings\Facades\Settings::get($key, $def);
+            return app('mrluke-settings-manager')->get($key, $def);
         } elseif (is_array($key)) {
             // You will set a new value to given key or get key
             // if array has only one element.
             if (count($key) > 1) {
-                return \Mrluke\Settings\Facades\Settings::set($key[0], $key[1]);
+                return app('mrluke-settings-manager')->set($key[0], $key[1]);
             } else {
-                return \Mrluke\Settings\Facades\Settings::get($key);
+                return app('mrluke-settings-manager')->get($key);
             }
         }
     }

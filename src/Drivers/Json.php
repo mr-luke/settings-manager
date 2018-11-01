@@ -1,6 +1,6 @@
 <?php
 
-namespace Mrluke\Drivers;
+namespace Mrluke\Settings\Drivers;
 
 use InvalidArgumentException;
 use Mrluke\Settings\Concerns\Castable;
@@ -21,7 +21,7 @@ class Json extends Driver
     /**
      * Raw data loaded from storage.
      *
-     * @var Illuminate\Support\Collection
+     * @var \Illuminate\Support\Collection
      */
     protected $raw;
 

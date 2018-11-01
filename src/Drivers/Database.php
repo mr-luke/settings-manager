@@ -24,7 +24,7 @@ class Database extends Driver implements CachableContract
     /**
      * Raw data loaded from storage.
      *
-     * @var Illuminate\Support\Collection
+     * @var \Illuminate\Support\Collection
      */
     protected $raw;
 
@@ -144,7 +144,7 @@ class Database extends Driver implements CachableContract
     /**
      * Return QueryBuilder for a settings table.
      *
-     * @return Illuminate\Database\Builder
+     * @return \Illuminate\Database\Query\Builder
      */
     protected function getRawQuery()
     {
@@ -154,7 +154,7 @@ class Database extends Driver implements CachableContract
     /**
      * Return QueryBuilder for a settings table.
      *
-     * @return Illuminate\Database\Builder
+     * @return \Illuminate\Database\Query\Builder
      */
     protected function getQuery()
     {
@@ -171,7 +171,7 @@ class Database extends Driver implements CachableContract
         $object = $this;
 
         return $this->raw->flatMap(function ($item) use ($object) {
-            return [$item->key => $this->castToType($item->value, $item->type)];
+            return [$item->key => $object->castToType($item->value, $item->type)];
         })->toArray();
     }
 }

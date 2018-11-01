@@ -29,7 +29,7 @@ class Manager
     /**
      * Raw collection of settings.
      *
-     * @var Mrluke\Settings\Contracts\ArrayHost
+     * @var \Mrluke\Settings\Contracts\ArrayHost
      */
     private $config;
 
@@ -43,7 +43,7 @@ class Manager
      *
      * @param string $name
      *
-     * @return Mrluke\Settings\Contracts\Bag
+     * @return \Mrluke\Settings\Contracts\Bag
      */
     public function bag(string $name) : Bag
     {
@@ -74,7 +74,7 @@ class Manager
      *
      * @param string $name
      *
-     * @return Mrluke\Settings\Contracts\Bag
+     * @return \Mrluke\Settings\Contracts\Bag
      */
     protected function getBagInstance(string $name) : Bag
     {

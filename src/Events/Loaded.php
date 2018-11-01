@@ -26,7 +26,8 @@ class Loaded
     /**
      * Create a new event instance.
      *
-     * @param Page $model
+     * @param  string $driver
+     * @param  string $bag
      *
      * @return void
      */
