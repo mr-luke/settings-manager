@@ -40,10 +40,10 @@ class Updated
     /**
      * Create a new event instance.
      *
-     * @param  string $driver
-     * @param  string $bag
-     * @param  string $key
-     * @param  mixed  $value
+     * @param string $driver
+     * @param string $bag
+     * @param string $key
+     * @param mixed  $value
      *
      * @return void
      */

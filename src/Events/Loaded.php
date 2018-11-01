@@ -26,8 +26,8 @@ class Loaded
     /**
      * Create a new event instance.
      *
-     * @param  string $driver
-     * @param  string $bag
+     * @param string $driver
+     * @param string $bag
      *
      * @return void
      */
