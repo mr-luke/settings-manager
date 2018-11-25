@@ -16,7 +16,8 @@ interface Bag
     /**
      * Delete setting by a given key.
      *
-     * @param  string $key
+     * @param string $key
+     *
      * @return void
      */
     public function forget(string $key) : void;
@@ -24,7 +25,8 @@ interface Bag
     /**
      * Return setting of given key.
      *
-     * @param  string $key
+     * @param string $key
+     *
      * @return mixed
      */
     public function get(string $key, $default = null);

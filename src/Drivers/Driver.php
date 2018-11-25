@@ -32,7 +32,7 @@ abstract class Driver implements DriverContract
      */
     protected $config;
 
-    function __construct(array $config, string $bagName)
+    public function __construct(array $config, string $bagName)
     {
         $this->config = $config;
         $this->bag = $bagName;
@@ -41,7 +41,8 @@ abstract class Driver implements DriverContract
     /**
      * Delete given key.
      *
-     * @param  string $key
+     * @param string $key
+     *
      * @return void
      */
     abstract public function delete(string $key) : void;
@@ -56,9 +57,10 @@ abstract class Driver implements DriverContract
     /**
      * Insert new key.
      *
-     * @param  string $key
-     * @param  mixed  $value
-     * @param  string $type
+     * @param string $key
+     * @param mixed  $value
+     * @param string $type
+     *
      * @return mixed
      */
     abstract public function insert(string $key, $value, string $type);
@@ -66,8 +68,9 @@ abstract class Driver implements DriverContract
     /**
      * Update given key.
      *
-     * @param  string $key
-     * @param  mixed  $value
+     * @param string $key
+     * @param mixed  $value
+     *
      * @return mixed
      */
     abstract public function update(string $key, $value);

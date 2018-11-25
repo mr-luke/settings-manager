@@ -2,8 +2,8 @@
 
 namespace Mrluke\Settings\Events;
 
-use Illuminate\Queue\SerializesModels;
 use Illuminate\Foundation\Events\Dispatchable;
+use Illuminate\Queue\SerializesModels;
 
 class Forgeting
 {
@@ -34,12 +34,13 @@ class Forgeting
      * Create a new event instance.
      *
      * @param Page $model
+     *
      * @return void
      */
     public function __construct(string $driver, string $bag, string $key)
     {
-        $this->bag    = $bag;
+        $this->bag = $bag;
         $this->driver = $driver;
-        $this->key    = $key;
+        $this->key = $key;
     }
 }

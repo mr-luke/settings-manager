@@ -16,7 +16,8 @@ interface Driver
     /**
      * Delete given key.
      *
-     * @param  string $key
+     * @param string $key
+     *
      * @return void
      */
     public function delete(string $key) : void;
@@ -31,9 +32,10 @@ interface Driver
     /**
      * Insert new key.
      *
-     * @param  string $key
-     * @param  mixed  $value
-     * @param  string $type
+     * @param string $key
+     * @param mixed  $value
+     * @param string $type
+     *
      * @return mixed
      */
     public function insert(string $key, $value, string $type);
@@ -41,8 +43,9 @@ interface Driver
     /**
      * Update given key.
      *
-     * @param  string $key
-     * @param  mixed  $value
+     * @param string $key
+     * @param mixed  $value
+     *
      * @return mixed
      */
     public function update(string $key, $value);

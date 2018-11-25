@@ -39,10 +39,10 @@ class DatabaseDriverTests extends TestCase
         $this->assertEquals('string', gettype($value));
 
         $this->assertDatabaseHas('settings', [
-            'bag' => 'database',
-            'key' => 'first',
-            'type' => 'string',
-            'value' => 'first value'
+            'bag'   => 'database',
+            'key'   => 'first',
+            'type'  => 'string',
+            'value' => 'first value',
         ]);
     }
 
@@ -56,10 +56,10 @@ class DatabaseDriverTests extends TestCase
         $this->assertTrue(is_float($value));
 
         $this->assertDatabaseHas('settings', [
-            'bag' => 'database',
-            'key' => 'second_float',
-            'type' => 'float',
-            'value' => '5.567'
+            'bag'   => 'database',
+            'key'   => 'second_float',
+            'type'  => 'float',
+            'value' => '5.567',
         ]);
     }
 
@@ -70,7 +70,7 @@ class DatabaseDriverTests extends TestCase
         $value = $bag->register('third_integer', 5, 'integer');
 
         $this->assertEquals(5, $value);
-        $this->assertTrue(is_integer($value));
+        $this->assertTrue(is_int($value));
     }
 
     public function testRegisterBoolValue()
@@ -83,10 +83,10 @@ class DatabaseDriverTests extends TestCase
         $this->assertTrue(is_bool($value));
 
         $this->assertDatabaseHas('settings', [
-            'bag' => 'database',
-            'key' => 'fourth_bool',
-            'type' => 'bool',
-            'value' => true
+            'bag'   => 'database',
+            'key'   => 'fourth_bool',
+            'type'  => 'bool',
+            'value' => true,
         ]);
     }
 
@@ -95,7 +95,7 @@ class DatabaseDriverTests extends TestCase
         $bag = (new Manager($this->getManagerConfiguration()))->bag('database');
 
         $array = [
-            'first' => 'value',
+            'first'  => 'value',
             'second' => 'value',
         ];
 
@@ -105,10 +105,10 @@ class DatabaseDriverTests extends TestCase
         $this->assertTrue(is_array($value));
 
         $this->assertDatabaseHas('settings', [
-            'bag' => 'database',
-            'key' => 'fifth_array',
-            'type' => 'array',
-            'value' => json_encode($array)
+            'bag'   => 'database',
+            'key'   => 'fifth_array',
+            'type'  => 'array',
+            'value' => json_encode($array),
         ]);
     }
 
@@ -173,9 +173,9 @@ class DatabaseDriverTests extends TestCase
         $this->assertNotEquals($oldValue, $newValue);
 
         $this->assertDatabaseHas('settings', [
-            'bag' => 'database',
-            'key' => 'age',
-            'type' => 'integer',
+            'bag'   => 'database',
+            'key'   => 'age',
+            'type'  => 'integer',
             'value' => 21,
         ]);
     }
@@ -189,9 +189,9 @@ class DatabaseDriverTests extends TestCase
         $bag->set('age_2', 25);
 
         $this->assertDatabaseHas('settings', [
-            'bag' => 'database',
-            'key' => 'age_1',
-            'type' => 'integer',
+            'bag'   => 'database',
+            'key'   => 'age_1',
+            'type'  => 'integer',
             'value' => 20,
         ]);
 
@@ -206,9 +206,9 @@ class DatabaseDriverTests extends TestCase
         ]);
 
         $this->assertDatabaseHas('settings', [
-            'bag' => 'database',
-            'key' => 'age_2',
-            'type' => 'integer',
+            'bag'   => 'database',
+            'key'   => 'age_2',
+            'type'  => 'integer',
             'value' => 25,
         ]);
     }
@@ -227,16 +227,16 @@ class DatabaseDriverTests extends TestCase
         $this->assertNotEquals($value1, $value2);
 
         $this->assertDatabaseHas('settings', [
-            'bag' => 'database',
-            'key' => 'age',
-            'type' => 'integer',
+            'bag'   => 'database',
+            'key'   => 'age',
+            'type'  => 'integer',
             'value' => 20,
         ]);
 
         $this->assertDatabaseHas('settings', [
-            'bag' => 'other',
-            'key' => 'age',
-            'type' => 'integer',
+            'bag'   => 'other',
+            'key'   => 'age',
+            'type'  => 'integer',
             'value' => 25,
         ]);
     }
