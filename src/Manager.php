@@ -3,7 +3,7 @@
 namespace Mrluke\Settings;
 
 use InvalidArgumentException;
-use Mrluke\Settings\Contracts\ArrayHost;
+use Mrluke\Configuration\Contracts\ArrayHost;
 use Mrluke\Settings\Contracts\Bag;
 
 /**
