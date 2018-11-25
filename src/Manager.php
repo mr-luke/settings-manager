@@ -41,7 +41,8 @@ class Manager
     /**
      * Return instance of given Bag by name.
      *
-     * @param  string $name
+     * @param string $name
+     *
      * @return Mrluke\Settings\Contracts\Bag
      */
     public function bag(string $name) : Bag
@@ -58,8 +59,9 @@ class Manager
     /**
      * Return default Bag.
      *
-     * @param  string $method
-     * @param  array  $parameters
+     * @param string $method
+     * @param array  $parameters
+     *
      * @return mixed
      */
     public function __call($method, $parameters)
@@ -70,7 +72,8 @@ class Manager
     /**
      * Return assign bag with injected Driver.
      *
-     * @param  string $name
+     * @param string $name
+     *
      * @return Mrluke\Settings\Contracts\Bag
      */
     protected function getBagInstance(string $name) : Bag

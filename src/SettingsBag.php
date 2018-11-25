@@ -36,7 +36,7 @@ final class SettingsBag implements Bag
     /**
      * Determine if driver already loaded data.
      *
-     * @var boolean
+     * @var bool
      */
     protected $loaded = false;
 
@@ -54,7 +54,7 @@ final class SettingsBag implements Bag
      */
     protected $types = ['array', 'bool', 'boolean', 'double', 'float', 'integer', 'json', 'string'];
 
-    function __construct(Driver $driver, string $name)
+    public function __construct(Driver $driver, string $name)
     {
         $this->driver = $driver;
         $this->name = $name;
@@ -63,7 +63,8 @@ final class SettingsBag implements Bag
     /**
      * Delete setting by a given key.
      *
-     * @param  string $key
+     * @param string $key
+     *
      * @return void
      */
     public function forget(string $key) : void
@@ -76,13 +77,16 @@ final class SettingsBag implements Bag
     /**
      * Return setting of given key.
      *
-     * @param  string $key
+     * @param string $key
+     *
      * @return mixed
      */
     public function get(string $key, $default = null)
     {
         // In case where not loaded yet.
-        if (!$this->loaded) $this->load();
+        if (!$this->loaded) {
+            $this->load();
+        }
 
         return $this->bag[$key] ?? $default;
     }
@@ -102,8 +106,12 @@ final class SettingsBag implements Bag
                 sprintf('Given %s type is not allowed.', $type)
             );
         }
-        if ($type == 'boolean') $type = "bool";
-        if ($type == 'double') $type = "float";
+        if ($type == 'boolean') {
+            $type = 'bool';
+        }
+        if ($type == 'double') {
+            $type = 'float';
+        }
 
         $this->bag[$key] = $this->driver->insert($key, $value, $type);
 
@@ -120,7 +128,9 @@ final class SettingsBag implements Bag
     public function set(string $key, $value)
     {
         // In case where not loaded yet.
-        if (!$this->loaded) $this->load();
+        if (!$this->loaded) {
+            $this->load();
+        }
 
         // If there is no setting yet, register new one
         // with autodetected type.
@@ -141,7 +151,7 @@ final class SettingsBag implements Bag
     protected function load() : void
     {
         $this->bag = $this->driver->fetch();
-        
+
         $this->loaded = true;
     }
 }

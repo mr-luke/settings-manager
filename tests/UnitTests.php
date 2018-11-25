@@ -65,7 +65,7 @@ class UnitTests extends TestCase
                 'general' => [
                     'driver'   => 'database',
                     'cache'    => true,
-                    'lifetime' => 60
+                    'lifetime' => 60,
                 ],
             ],
             'drivers' => [
@@ -74,7 +74,7 @@ class UnitTests extends TestCase
                     'connection' => 'mysql',
                     'table'      => 'settings',
                 ],
-            ]
+            ],
         ];
 
         $manager = new Manager(new Host($configData));

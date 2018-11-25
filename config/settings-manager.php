@@ -28,7 +28,7 @@ return [
         'general' => [
             'driver'   => 'database',
             'cache'    => true,
-            'lifetime' => 60
+            'lifetime' => 60,
         ],
 
     ],

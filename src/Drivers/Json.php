@@ -3,7 +3,6 @@
 namespace Mrluke\Settings\Drivers;
 
 use InvalidArgumentException;
-use Illuminate\Support\Facades\DB;
 use Mrluke\Settings\Concerns\Castable;
 
 /**
@@ -26,7 +25,7 @@ class Json extends Driver
      */
     protected $raw;
 
-    function __construct(array $config, string $bagName ,array $bagConfig)
+    public function __construct(array $config, string $bagName, array $bagConfig)
     {
         if (array_keys($config) != ['path', 'file']) {
             throw new InvalidArgumentException('Driver Json is not configurated properly.');
@@ -38,7 +37,8 @@ class Json extends Driver
     /**
      * Delete given key.
      *
-     * @param  string $key
+     * @param string $key
+     *
      * @return void
      */
     public function delete(string $key) : void
@@ -69,9 +69,10 @@ class Json extends Driver
     /**
      * Insert new key.
      *
-     * @param  string $key
-     * @param  mixed  $value
-     * @param  string $type
+     * @param string $key
+     * @param mixed  $value
+     * @param string $type
+     *
      * @return mixed
      */
     public function insert(string $key, $value, string $type)
@@ -88,8 +89,9 @@ class Json extends Driver
     /**
      * Update given key.
      *
-     * @param  string $key
-     * @param  mixed  $value
+     * @param string $key
+     * @param mixed  $value
+     *
      * @return mixed
      */
     public function update(string $key, $value)
