@@ -10,12 +10,12 @@ use Mrluke\Settings\Contracts\Bag;
  * Manager is main class providing settings management system.
  *
  * @author    Łukasz Sitnicki (mr-luke)
- *
  * @link      http://github.com/mr-luke/settings-manager
  *
  * @version   1.0
- *
  * @license   MIT
+ *
+ * @method    mixed get(string $key)
  */
 class Manager
 {
