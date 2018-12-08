@@ -14,9 +14,11 @@ if (!function_exists('settings')) {
         if (is_null($key)) {
             // You will get an instance of Manager.
             return app('mrluke-settings-manager');
+
         } elseif (is_string($key)) {
             // You will get setting option with default fallback.
             return \Mrluke\Settings\Facades\Settings::get($key, $def);
+
         } elseif (is_array($key)) {
             // You will set a new value to given key or get key
             // if array has only one element.

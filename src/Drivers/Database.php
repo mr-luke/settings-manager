@@ -53,6 +53,7 @@ class Database extends Driver implements CachableContract
         $this->getQuery()->where('key', $key)->delete();
 
         $this->fireForgotEvent($key);
+        $this->flushCache();
     }
 
     /**
@@ -113,6 +114,7 @@ class Database extends Driver implements CachableContract
         ]);
 
         $this->fireRegisteredEvent($key, $value);
+        $this->flushCache();
 
         return $value;
     }
@@ -137,6 +139,7 @@ class Database extends Driver implements CachableContract
         ]);
 
         $this->fireUpdatedEvent($key, $value);
+        $this->flushCache();
 
         return $value;
     }
