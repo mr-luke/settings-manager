@@ -15,8 +15,12 @@ use Mrluke\Settings\Contracts\Bag;
  * @version   1.0
  * @license   MIT
  *
+<<<<<<< HEAD
  * @method    mixed get($key)
  * @method    mixed set($key, $value)
+=======
+ * @method    mixed get(string $key)
+>>>>>>> 06d9275ea49b4afa83b20f8d6518e78dcf5e9802
  */
 class Manager
 {
