@@ -19,23 +19,9 @@ trait Castable
      *
      * @return mixed
      */
-    protected function castToType($value, string $type)
+    public function castToType($value, string $type)
     {
         return is_null($value) ? $value : $this->{'cast'.ucfirst($type)}($value);
-    }
-
-    /**
-     * Determine if given value is json type.
-     *
-     * @param mixed $value
-     *
-     * @return bool
-     */
-    protected function is_json($value) : bool
-    {
-        json_decode($value);
-
-        return json_last_error() == JSON_ERROR_NONE;
     }
 
     /**
@@ -90,7 +76,14 @@ trait Castable
      */
     private function castJson($value): string
     {
-        return $this->is_json($value) ? $value : json_encode($value, JSON_UNESCAPED_UNICODE);
+        if (!is_string($value)) {
+            $value = is_array($value) ? json_encode($value) : (string) $value;
+        }
+
+        json_decode($value);
+
+        return (json_last_error() == JSON_ERROR_NONE) ?
+                    $value : json_encode($value, JSON_UNESCAPED_UNICODE);
     }
 
     /**
