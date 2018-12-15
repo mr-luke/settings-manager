@@ -3,7 +3,7 @@
 namespace Mrluke\Settings;
 
 use InvalidArgumentException;
-use Mrluke\Settings\Contracts\ArrayHost;
+use Mrluke\Configuration\Host;
 use Mrluke\Settings\Contracts\Bag;
 
 /**
@@ -29,11 +29,11 @@ class Manager
     /**
      * Raw collection of settings.
      *
-     * @var \Mrluke\Settings\Contracts\ArrayHost
+     * @var \Mrluke\Configuration\Host
      */
     private $config;
 
-    public function __construct(ArrayHost $configuration)
+    public function __construct(Host $configuration)
     {
         $this->config = $configuration;
     }
