@@ -112,8 +112,8 @@ class TestCase extends BaseCase
                 ],
                 'json' => [
                     'class' => \Mrluke\Settings\Drivers\Json::class,
-                    'path'  => __DIR__.'/storage/',
-                    'file'  => 'settings.json',
+                    'path'  => __DIR__.'/../',
+                    'file'  => 'test.json',
                 ],
             ],
         ];
