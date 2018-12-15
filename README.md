@@ -50,23 +50,29 @@ To use `SettingsManager` you need to setup your `Bags` first. Add your own one t
 
 ```php
 'bags' => [
-	'general' => [ // Given key is used as a Bag name
-	    'driver'   => 'database', // One of available drivers
-	    'cache'    => true, // Should be Cached
-	    'lifetime' => 60 // Cache lifetime in minutes
+    'general' => [ // Given key is used as a Bag name
+        'driver'   => 'database', // One of available drivers
+        'cache'    => true, // Should be Cached
+        'lifetime' => 60 // Cache lifetime in minutes
 	],
 ],
 ```
 
-You can setup different database connections or tables by new `driver` in:
+You can setup different database connections or tables by new `driver` or different `json` files in:
 
 ```php
 'drivers' => [
-	'database' => [
-	    'class'      => \Mrluke\Settings\Drivers\Database::class,
-	    'connection' => 'mysql',
-	    'table'      => 'settings',
-	 ],     
+    'database' => [
+        'class'      => \Mrluke\Settings\Drivers\Database::class,
+        'connection' => 'mysql',
+        'table'      => 'settings',
+    ],
+  
+    'json' => [
+        'class' => \Mrluke\Settings\Drivers\Json::class,
+        'path'  => base_path('storage/app/settings/'),
+        'file'  => 'settings.json',
+    ]
 ],
 ``` 
 
@@ -158,9 +164,25 @@ Namespace `Mrluke\Settings\Events`:
 * `Updating`
 * `Updated`
 
+### JSON Structure
+
+`SettingsManager` provides JSON Driver for configurations that can be share with front-end apps. The structure looks like this:
+
+```json
+{
+  "key": {
+    "type": "<type>",
+    "value": "<value>"
+  },
+  "another": {
+    "type": "<type>",
+    "value": "<value>"
+  }
+}
+```
+
 ## Plans
 
-* JSON Driver (eg. front-end shared configuration)
 * Artisan Commands
 * Blade helpers for `bool` keys
 * Additional option to store `default` value from `get()` method

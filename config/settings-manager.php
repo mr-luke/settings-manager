@@ -57,6 +57,11 @@ return [
             'table'      => 'settings',
         ],
 
+        'json' => [
+            'class' => \Mrluke\Settings\Drivers\Json::class,
+            'path'  => base_path('storage/app/settings/'),
+            'file'  => 'settings.json',
+        ],
     ],
 
 ];

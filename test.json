@@ -1,0 +1,18 @@
+{
+    "key": {
+        "type": "string",
+        "value": "value of a key"
+    },
+    "first": {
+        "type": "string",
+        "value": "first value"
+    },
+    "float": {
+        "type": "float",
+        "value": 5.567
+    },
+    "age": {
+        "type": "integer",
+        "value": 21
+    }
+}

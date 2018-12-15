@@ -21,7 +21,7 @@ class Json extends Driver
     /**
      * Raw data loaded from storage.
      *
-     * @var \Illuminate\Support\Collection
+     * @var array
      */
     protected $raw;
 
@@ -45,7 +45,11 @@ class Json extends Driver
     {
         $this->fireForgetingEvent($key);
 
-        // TODO
+        $this->loadIfNotLoaded();
+
+        unset($this->raw[$key]);
+
+        $this->saveContent();
 
         $this->fireForgotEvent($key);
     }
@@ -55,13 +59,15 @@ class Json extends Driver
      *
      * @return self
      */
-    public function fetch() : self
+    public function fetch() : array
     {
         $this->fireLoadingEvent();
 
-        // TODO
+        $this->loadIfNotLoaded();
 
         $this->fireLoadedEvent();
+
+        return $this->parse();
     }
 
     /**
@@ -77,21 +83,18 @@ class Json extends Driver
     {
         $this->fireRegisteringEvent($key);
 
-        // TODO
+        $this->loadIfNotLoaded();
+
+        $this->raw[$key] = [
+            'type'  => $type,
+            'value' => $value
+        ];
+
+        $this->saveContent();
 
         $this->fireRegisteredEvent($key, $value);
 
         return $value;
-    }
-
-    /**
-     * Parse Raw data to asoc array.
-     *
-     * @return array
-     */
-    public function parse() : array
-    {
-        // TODO
     }
 
     /**
@@ -106,10 +109,71 @@ class Json extends Driver
     {
         $this->fireUpdatingEvent($key);
 
-        // TODO
+        $this->loadIfNotLoaded();
+
+        $this->raw[$key]['value'] = $value;
+
+        $this->saveContent();
 
         $this->fireUpdatedEvent($key, $value);
 
         return $value;
+    }
+
+    /**
+     * Loads JSON from file if not loaded yet.
+     *
+     * @return void
+     * @throws \InvalidArgumentException
+     */
+    protected function loadIfNotLoaded(): void
+    {
+        $fullPath = $this->getFullPath();
+
+        if (!file_exists($fullPath)) {
+            throw new InvalidArgumentException(
+                sprintf('Following file %s does not exstis.', $fullPath)
+            );
+        }
+
+        if (is_null($this->raw)) {
+            $this->raw = json_decode(file_get_contents($fullPath), true);
+        }
+    }
+
+    /**
+     * Parse from raw array to public.
+     *
+     * @return array
+     */
+    protected function parse(): array
+    {
+        $object = $this;
+
+        return collect($this->raw)->flatMap(function ($item, $key) use ($object) {
+            return [$key => $this->castToType($item['value'], $item['type'])];
+        })->toArray();
+    }
+
+    /**
+     * Save content to json file.
+     *
+     * @return void
+     */
+    protected function saveContent(): void
+    {
+        $fp = fopen($this->getFullPath(), 'w');
+        fwrite($fp, json_encode($this->raw, JSON_PRETTY_PRINT));
+        fclose($fp);
+    }
+
+    /**
+     * Return full path to file.
+     *
+     * @return string
+     */
+    private function getFullPath(): string
+    {
+        return $this->config['path'].$this->config['file'];
     }
 }

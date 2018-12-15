@@ -2,7 +2,7 @@
 
 namespace Mrluke\Settings\Tests;
 
-use Mrluke\Settings\Configuration;
+use Mrluke\Configuration\Host;
 use Orchestra\Testbench\TestCase as BaseCase;
 
 /**
@@ -22,7 +22,7 @@ class TestCase extends BaseCase
     const DB_HOST = 'localhost';
     const DB_NAME = 'packages';
     const DB_USERNAME = 'root';
-    const DB_PASSWORD = 'root';
+    const DB_PASSWORD = '';
     const DB_PREFIX = 'settings_';
 
     /**
@@ -82,9 +82,9 @@ class TestCase extends BaseCase
     /**
      * Setup and return test configuration for Manager.
      *
-     * @return Mrluke\Settings\Configuration
+     * @return Mrluke\Configuration\Host
      */
-    protected function getManagerConfiguration() : Configuration
+    protected function getManagerConfiguration() : Host
     {
         $config = [
             'bags' => [
@@ -112,13 +112,13 @@ class TestCase extends BaseCase
                 ],
                 'json' => [
                     'class' => \Mrluke\Settings\Drivers\Json::class,
-                    'path'  => __DIR__.'/storage/',
-                    'file'  => 'settings.json',
+                    'path'  => __DIR__.'/../',
+                    'file'  => 'test.json',
                 ],
             ],
         ];
 
-        return new Configuration($config);
+        return new Host($config);
     }
 
     /**

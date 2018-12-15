@@ -48,7 +48,7 @@ class SettingsServiceProvider extends ServiceProvider
             // Wrap up configuration array with Object is a good practice to
             // strict code & follow SOLID principles.
             //
-            $config = new \Mrluke\Settings\Configuration($app['config']->get('settings-manager'));
+            $config = new \Mrluke\Configuration\Host($app['config']->get('settings-manager'));
 
             return new \Mrluke\Settings\Manager($config);
         });

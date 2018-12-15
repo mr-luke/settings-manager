@@ -4,8 +4,8 @@ namespace Mrluke\Settings\Tests;
 
 use Mockery;
 use Mockery\Adapter\Phpunit\MockeryPHPUnitIntegration;
-use Mrluke\Settings\Configuration;
-use Mrluke\Settings\Contracts\ArrayHost;
+use Mrluke\Configuration\Contracts\ArrayHost;
+use Mrluke\Configuration\Host;
 use Mrluke\Settings\Contracts\Bag;
 use Mrluke\Settings\Contracts\Cachable;
 use Mrluke\Settings\Contracts\Driver;
@@ -32,7 +32,7 @@ class UnitTests extends TestCase
     {
         $array = ['test' => 'test'];
 
-        $config = new Configuration($array);
+        $config = new Host($array);
 
         $this->assertTrue($config instanceof ArrayHost);
     }
@@ -77,7 +77,7 @@ class UnitTests extends TestCase
             ],
         ];
 
-        $manager = new Manager(new Configuration($configData));
+        $manager = new Manager(new Host($configData));
 
         $shouldBag = $manager->bag('general');
 
