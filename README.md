@@ -174,7 +174,10 @@ Namespace `Mrluke\Settings\Events`:
     "type": "<type>",
     "value": "<value>"
   },
-  ...
+  "another": {
+    "type": "<type>",
+    "value": "<value>"
+  }
 }
 ```
 
