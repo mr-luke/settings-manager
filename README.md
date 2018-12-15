@@ -50,10 +50,10 @@ To use `SettingsManager` you need to setup your `Bags` first. Add your own one t
 
 ```php
 'bags' => [
-	'general' => [ // Given key is used as a Bag name
-	    'driver'   => 'database', // One of available drivers
-	    'cache'    => true, // Should be Cached
-	    'lifetime' => 60 // Cache lifetime in minutes
+    'general' => [ // Given key is used as a Bag name
+        'driver'   => 'database', // One of available drivers
+        'cache'    => true, // Should be Cached
+        'lifetime' => 60 // Cache lifetime in minutes
 	],
 ],
 ```
@@ -62,17 +62,17 @@ You can setup different database connections or tables by new `driver` or differ
 
 ```php
 'drivers' => [
-  'database' => [
-    'class'      => \Mrluke\Settings\Drivers\Database::class,
-	  'connection' => 'mysql',
-	  'table'      => 'settings',
-  ],
+    'database' => [
+        'class'      => \Mrluke\Settings\Drivers\Database::class,
+        'connection' => 'mysql',
+        'table'      => 'settings',
+    ],
   
-  'json' => [
-    'class' => \Mrluke\Settings\Drivers\Json::class,
-    'path'  => base_path('storage/app/settings/'),
-    'file'  => 'settings.json',
-  ]
+    'json' => [
+        'class' => \Mrluke\Settings\Drivers\Json::class,
+        'path'  => base_path('storage/app/settings/'),
+        'file'  => 'settings.json',
+    ]
 ],
 ``` 
 
