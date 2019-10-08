@@ -17,7 +17,7 @@ This package provides settings manager that supports multiple setting bags with 
 
 ## Getting Started
 
-Setting Manager has been developed using `Laravel 5.5`
+Setting Manager has been developed using `Laravel 5.5`. Support for Laravel 6 checked.
 It's recommended to test it out before using with previous versions. PHP >= 7.1.3 is required.
 
 ## Installation
@@ -67,14 +67,14 @@ You can setup different database connections or tables by new `driver` or differ
         'connection' => 'mysql',
         'table'      => 'settings',
     ],
-  
+
     'json' => [
         'class' => \Mrluke\Settings\Drivers\Json::class,
         'path'  => base_path('storage/app/settings/'),
         'file'  => 'settings.json',
     ]
 ],
-``` 
+```
 
 You can also publish config file via command:
 ```bash
@@ -89,9 +89,9 @@ You can access to `Manager` and your `Bags` using `Mrluke\Settings\Facades\Setti
 
 ### Type
 
-`SettingsManager` is a type casted tool that care about it during the whole process. 
+`SettingsManager` is a type casted tool that care about it during the whole process.
 
-Example: *You can pass `string 5.567` to `set` method for `ratio` setting (`float`) and `SettingsManager` will cast the value to `float 5.567` behind the scean.* 
+Example: *You can pass `string 5.567` to `set` method for `ratio` setting (`float`) and `SettingsManager` will cast the value to `float 5.567` behind the scean.*
 
 Whereever you ask for certain key, it will always be correct type. But all begins at the point of `registering`...
 
@@ -100,7 +100,7 @@ Whereever you ask for certain key, it will always be correct type. But all begin
 To register new value use:
 ```php
 $value = Settings::register(string $key, $value, string $type);
-``` 
+```
 This method returns given `$value` casted to given `$type`.
 
 ### Accessing index
@@ -108,7 +108,7 @@ This method returns given `$value` casted to given `$type`.
 To get value use:
 ```php
 $value = Settings::get(string $key, $default = null);
-``` 
+```
 This method returns `$default` in case given `$key` is not present in the `Bag`. Otherwise `$value` is casted to registered `type`.
 
 ### Setting new value of index
@@ -116,30 +116,30 @@ This method returns `$default` in case given `$key` is not present in the `Bag`.
 To set new value use:
 ```php
 $value = Settings::set(string $key, $value);
-``` 
+```
 This method returns `$value` casted to registered `type`. If given `$key` is not present, it will automaticaly call `register` method with auto-detected `type`.
 
-*This method shoud not be use to register settings in general! Use `Eventing` to detect all needed settings during development.* 
+*This method shoud not be use to register settings in general! Use `Eventing` to detect all needed settings during development.*
 
 ### Forgeting  an index
 
 To forget an index use:
 ```php
 Settings::forget(string $key);
-``` 
+```
 
 ### Default `Bag` vs specified
 
 To access specific `Bag` use bag accessor method:
  ```php
 $value = Settings::bag(string $name)->get(string $key, $default = null);
-``` 
+```
 
 ### Helper
 
 You can access to `SettingsManager` via helper function:
 ```php
-// Get index 
+// Get index
 settings(string $key);
 // Set value
 settings([string $key => $value]);
@@ -149,7 +149,7 @@ settings()->forget(string $key);
 
 ### Events
 
-`SettingsManager` provides you a list of `pre` and `post` action events to help you handle different situations. 
+`SettingsManager` provides you a list of `pre` and `post` action events to help you handle different situations.
 
 Example: *You can use `Mrluke\Settings\Events\Registered` event to prepare full list of production settings.*
 
