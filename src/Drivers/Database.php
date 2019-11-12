@@ -46,7 +46,7 @@ class Database extends Driver implements CachableContract
      *
      * @return void
      */
-    public function delete(string $key) : void
+    public function delete(string $key): void
     {
         $this->fireForgetingEvent($key);
 
@@ -129,7 +129,8 @@ class Database extends Driver implements CachableContract
     {
         $this->fireUpdatingEvent($key);
 
-        $type = $this->raw->where('key', $key)->first()['type'];
+        $row = $this->raw->where('key', $key)->first();
+        $type = is_object($row) ? $row->type : $row['type'];
         $value = $this->castToType($value, $type);
 
         $this->getQuery()->where('key', $key)->update([

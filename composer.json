@@ -12,6 +12,7 @@
     ],
     "require": {
         "php": ">=7.1",
+        "ext-json": "*",
         "illuminate/database": "^5.4|^6.0",
         "illuminate/support": "^5.4|^6.0",
         "mr-luke/configuration": "^1.0"
