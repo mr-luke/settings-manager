@@ -11,17 +11,17 @@
         }
     ],
     "require": {
-        "php": ">=7.2",
+        "php": ">=7.1",
         "ext-json": "*",
-        "illuminate/database": "^7.0",
-        "illuminate/support": "^7.0",
+        "illuminate/database": "^5.4|^6.0|^7.0",
+        "illuminate/support": "^5.4|^6.0|^7.0",
         "mr-luke/configuration": "^1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "^1.9",
         "mockery/mockery": "^1.0",
-        "orchestra/testbench": "^5.0",
-        "phpunit/phpunit": "^8.0"
+        "orchestra/testbench": "^3.4|^4.0|^5.0",
+        "phpunit/phpunit": "^7.0|^8.0"
     },
     "autoload": {
         "psr-4": {
