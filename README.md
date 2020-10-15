@@ -7,7 +7,7 @@ Settings Manager - Laravel multibag settings Package.
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/mr-luke/settings-manager/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/mr-luke/settings-manager/?branch=master)
 [![Build Status](https://scrutinizer-ci.com/g/mr-luke/settings-manager/badges/build.png?b=master)](https://scrutinizer-ci.com/g/mr-luke/settings-manager/build-status/master)
 
-This package provides settings manager that supports multiple setting bags with typed value.
+This package provides settings manamgement to your Laravel app with support of multiple setting bags with typed value.
 
 * [Getting Started](#getting-started)
 * [Installation](#installation)
@@ -17,8 +17,10 @@ This package provides settings manager that supports multiple setting bags with 
 
 ## Getting Started
 
-Setting Manager has been developed using `Laravel 5.5`. Support for Laravel 6 checked.
-It's recommended to test it out before using with previous versions. PHP >= 7.1.3 is required.
+Setting Manager supported versions:
+* Laravel 7.0
+* Laravel 6.*
+* Laravel ^5.5
 
 ## Installation
 
