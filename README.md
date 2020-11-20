@@ -17,7 +17,7 @@ This package provides settings manager that supports multiple setting bags with 
 
 ## Getting Started
 
-Setting Manager has been developed using `Laravel 5.5`. Support for Laravel 6 checked.
+Setting Manager has been developed using `Laravel 5.5`. Support up to Laravel 8 checked.
 It's recommended to test it out before using with previous versions. PHP >= 7.1.3 is required.
 
 ## Installation
