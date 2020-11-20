@@ -19,10 +19,10 @@ class TestCase extends BaseCase
     /**
      * DB configuration.
      */
-    const DB_HOST = 'localhost';
-    const DB_NAME = 'packages';
-    const DB_USERNAME = 'root';
-    const DB_PASSWORD = '';
+    const DB_HOST = 'mysql';
+    const DB_NAME = 'dev';
+    const DB_USERNAME = 'dev';
+    const DB_PASSWORD = 'dev';
     const DB_PREFIX = 'settings_';
 
     /**
