@@ -18,6 +18,7 @@ This package provides settings manamgement to your Laravel app with support of m
 ## Getting Started
 
 Setting Manager supported versions:
+* Laravel 8.0
 * Laravel 7.0
 * Laravel 6.*
 * Laravel ^5.5

@@ -1,0 +1,39 @@
+version: '3'
+services:
+  php:
+    image: movecloser/fpm:7.3
+    environment:
+        DB_CONNECTION: mysql
+        DB_HOST: mysql
+        DB_NAME: dev
+        DB_USER: dev
+        DB_PASS: dev
+    depends_on:
+      - mysql
+    volumes:
+      - .:/var/www:rw,cached
+      - sock:/sock
+    networks:
+      - appnet
+  mysql:
+    image: mariadb:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: dev
+      MYSQL_USER: dev
+      MYSQL_PASSWORD: dev
+    ports:
+     - 3307:3306
+    networks:
+     - appnet
+    volumes:
+     - dbdata:/var/lib/mysql
+    command: mysqld --sql_mode=""
+networks:
+  appnet:
+    driver: bridge
+volumes:
+  dbdata:
+    driver: local
+  sock:
+    driver: local
