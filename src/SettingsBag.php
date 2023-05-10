@@ -96,7 +96,7 @@ final class SettingsBag implements Bag
      * @param string $type
      * @return mixed
      */
-    public function register(string $key, $value, string $type): mixed
+    public function register(string $key, mixed $value, string $type): mixed
     {
         if (!in_array($type, $this->types)) {
             throw new InvalidArgumentException(
@@ -122,7 +122,7 @@ final class SettingsBag implements Bag
      * @param mixed  $value
      * @return mixed
      */
-    public function set(string $key, $value): mixed
+    public function set(string $key, mixed $value): mixed
     {
         // In case where not loaded yet.
         if (!$this->loaded) {

@@ -26,10 +26,10 @@ interface Bag
      * Return setting of given key.
      *
      * @param string $key
-     *
+     * @param null   $default
      * @return mixed
      */
-    public function get(string $key, $default = null);
+    public function get(string $key, $default = null): mixed;
 
     /**
      * Register new setting.
@@ -37,16 +37,16 @@ interface Bag
      * @param string $key
      * @param mixed  $value
      * @param string $type
-     * @param mixed
+     * @return mixed
      */
-    public function register(string $key, $value, string $type);
+    public function register(string $key, mixed $value, string $type): mixed;
 
     /**
      * Set new value for given setting.
      *
      * @param string $key
      * @param mixed  $value
-     * @param mixed
+     * @return mixed
      */
-    public function set(string $key, $value);
+    public function set(string $key, mixed $value): mixed;
 }

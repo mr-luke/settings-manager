@@ -14,14 +14,14 @@ class Loaded
      *
      * @var string
      */
-    public $bag;
+    public string $bag;
 
     /**
      * Used driver instance.
      *
      * @var string
      */
-    public $driver;
+    public string $driver;
 
     /**
      * Create a new event instance.

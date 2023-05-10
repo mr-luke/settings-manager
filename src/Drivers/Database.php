@@ -2,6 +2,8 @@
 
 namespace Mrluke\Settings\Drivers;
 
+use Illuminate\Database\Query\Builder;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use InvalidArgumentException;
 use Mrluke\Settings\Concerns\Cachable;
@@ -26,7 +28,7 @@ class Database extends Driver implements CachableContract
      *
      * @var \Illuminate\Support\Collection
      */
-    protected $raw;
+    protected Collection $raw;
 
     public function __construct(array $config, string $bagName, array $bagConfig)
     {
@@ -88,7 +90,7 @@ class Database extends Driver implements CachableContract
      *
      * @return mixed
      */
-    public function insert(string $key, $value, string $type)
+    public function insert(string $key, $value, string $type): mixed
     {
         $this->fireRegisteringEvent($key);
 
@@ -125,7 +127,7 @@ class Database extends Driver implements CachableContract
      *
      * @return mixed
      */
-    public function update(string $key, $value)
+    public function update(string $key, $value): mixed
     {
         $this->fireUpdatingEvent($key);
 
@@ -147,7 +149,7 @@ class Database extends Driver implements CachableContract
      *
      * @return \Illuminate\Database\Query\Builder
      */
-    protected function getRawQuery()
+    protected function getRawQuery(): Builder
     {
         return DB::connection($this->config['connection'])->table($this->config['table']);
     }
@@ -157,13 +159,13 @@ class Database extends Driver implements CachableContract
      *
      * @return \Illuminate\Database\Query\Builder
      */
-    protected function getQuery()
+    protected function getQuery(): Builder
     {
         return $this->getRawQuery()->where('bag', $this->bag);
     }
 
     /**
-     * Parse Raw data to asoc array.
+     * Parse Raw data to assoc array.
      *
      * @return array
      */

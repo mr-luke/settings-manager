@@ -4,10 +4,10 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Deafult Bag name
+    | Default Bag name
     |--------------------------------------------------------------------------
     |
-    | This config is use to determine defult Bag (string).
+    | This config is use to determine default Bag (string).
     |
     */
 

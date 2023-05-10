@@ -14,21 +14,21 @@ class Updating
      *
      * @var string
      */
-    public $bag;
+    public string $bag;
 
     /**
      * Used driver instance.
      *
      * @var string
      */
-    public $driver;
+    public string $driver;
 
     /**
      * Registering key name.
      *
      * @var string
      */
-    public $key;
+    public string $key;
 
     /**
      * Create a new event instance.

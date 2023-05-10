@@ -14,28 +14,28 @@ class Updated
      *
      * @var string
      */
-    public $bag;
+    public string $bag;
 
     /**
      * Used driver instance.
      *
      * @var string
      */
-    public $driver;
+    public string $driver;
 
     /**
      * Registered key name.
      *
      * @var string
      */
-    public $key;
+    public string $key;
 
     /**
      * Registered initial value.
      *
      * @var string
      */
-    public $value;
+    public mixed $value;
 
     /**
      * Create a new event instance.
@@ -47,7 +47,7 @@ class Updated
      *
      * @return void
      */
-    public function __construct(string $driver, string $bag, string $key, $value)
+    public function __construct(string $driver, string $bag, string $key, mixed $value)
     {
         $this->bag = $bag;
         $this->driver = $driver;
