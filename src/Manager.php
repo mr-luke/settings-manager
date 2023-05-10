@@ -11,11 +11,12 @@ use Mrluke\Settings\Contracts\Bag;
  *
  * @author    Łukasz Sitnicki (mr-luke)
  *
+ * @license   MIT
  * @link      http://github.com/mr-luke/settings-manager
  *
- * @version   1.0
- *
- * @license   MIT
+ * @method   mixed get(string $key, $default = null)
+ * @method   mixed register(string $key, mixed $value, string $type)
+ * @method   mixed set(string $key, mixed $value)
  */
 class Manager
 {
@@ -24,14 +25,14 @@ class Manager
      *
      * @var array
      */
-    private $bags = [];
+    private array $bags = [];
 
     /**
      * Raw collection of settings.
      *
      * @var \Mrluke\Configuration\Host
      */
-    private $config;
+    private Host $config;
 
     public function __construct(Host $configuration)
     {
@@ -45,7 +46,7 @@ class Manager
      *
      * @return \Mrluke\Settings\Contracts\Bag
      */
-    public function bag(string $name) : Bag
+    public function bag(string $name): Bag
     {
         if (!array_key_exists($name, $this->config->get('bags'))) {
             throw new InvalidArgumentException(
@@ -76,14 +77,14 @@ class Manager
      *
      * @return \Mrluke\Settings\Contracts\Bag
      */
-    protected function getBagInstance(string $name) : Bag
+    protected function getBagInstance(string $name): Bag
     {
-        // If there is already an instance, just reaturn
+        // If there is already an instance, just return
         if (isset($this->bags[$name])) {
             return $this->bags[$name];
         }
 
-        $bagConfig = $this->config->get('bags.'.$name);
+        $bagConfig = $this->config->get('bags.' . $name);
 
         if (array_keys($bagConfig) != ['driver', 'cache', 'lifetime']) {
             throw new InvalidArgumentException(
@@ -94,7 +95,7 @@ class Manager
         // through static call that check if all needed configuration
         // are present.
         //
-        $driverConfig = $this->config->get('drivers.'.$bagConfig['driver']);
+        $driverConfig = $this->config->get('drivers.' . $bagConfig['driver']);
         $class = $driverConfig['class'];
         unset($driverConfig['class']);
 

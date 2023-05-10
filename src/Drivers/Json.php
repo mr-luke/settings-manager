@@ -10,9 +10,9 @@ use Mrluke\Settings\Concerns\Castable;
  *
  * @author    Łukasz Sitnicki (mr-luke)
  *
+ * @license   MIT
  * @link      http://github.com/mr-luke/settings-manager
  *
- * @license   MIT
  */
 class Json extends Driver
 {
@@ -23,7 +23,7 @@ class Json extends Driver
      *
      * @var array
      */
-    protected $raw;
+    protected array $raw = [];
 
     public function __construct(array $config, string $bagName, array $bagConfig)
     {
@@ -41,7 +41,7 @@ class Json extends Driver
      *
      * @return void
      */
-    public function delete(string $key) : void
+    public function delete(string $key): void
     {
         $this->fireForgetingEvent($key);
 
@@ -57,9 +57,9 @@ class Json extends Driver
     /**
      * Load Raw data from storage.
      *
-     * @return self
+     * @return array
      */
-    public function fetch() : array
+    public function fetch(): array
     {
         $this->fireLoadingEvent();
 
@@ -79,14 +79,14 @@ class Json extends Driver
      *
      * @return mixed
      */
-    public function insert(string $key, $value, string $type)
+    public function insert(string $key, $value, string $type): mixed
     {
         $this->fireRegisteringEvent($key);
 
         $this->loadIfNotLoaded();
 
         $this->raw[$key] = [
-            'type'  => $type,
+            'type' => $type,
             'value' => $value
         ];
 
@@ -105,7 +105,7 @@ class Json extends Driver
      *
      * @return mixed
      */
-    public function update(string $key, $value)
+    public function update(string $key, $value): mixed
     {
         $this->fireUpdatingEvent($key);
 
@@ -148,9 +148,7 @@ class Json extends Driver
      */
     protected function parse(): array
     {
-        $object = $this;
-
-        return collect($this->raw)->flatMap(function ($item, $key) use ($object) {
+        return collect($this->raw)->flatMap(function($item, $key) {
             return [$key => $this->castToType($item['value'], $item['type'])];
         })->toArray();
     }
@@ -174,6 +172,6 @@ class Json extends Driver
      */
     private function getFullPath(): string
     {
-        return $this->config['path'].$this->config['file'];
+        return $this->config['path'] . $this->config['file'];
     }
 }

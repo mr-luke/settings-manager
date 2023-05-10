@@ -38,7 +38,7 @@ interface Driver
      *
      * @return mixed
      */
-    public function insert(string $key, $value, string $type);
+    public function insert(string $key, $value, string $type): mixed;
 
     /**
      * Update given key.
@@ -48,5 +48,5 @@ interface Driver
      *
      * @return mixed
      */
-    public function update(string $key, $value);
+    public function update(string $key, $value): mixed;
 }

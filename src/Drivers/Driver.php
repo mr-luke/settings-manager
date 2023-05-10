@@ -23,14 +23,14 @@ abstract class Driver implements DriverContract
      *
      * @var string
      */
-    protected $bag;
+    protected string $bag;
 
     /**
      * Configuration for driver.
      *
      * @var array
      */
-    protected $config;
+    protected array $config;
 
     public function __construct(array $config, string $bagName)
     {
@@ -50,7 +50,7 @@ abstract class Driver implements DriverContract
     /**
      * Load Raw data from storage.
      *
-     * @return self
+     * @return array
      */
     abstract public function fetch() : array;
 
@@ -63,7 +63,7 @@ abstract class Driver implements DriverContract
      *
      * @return mixed
      */
-    abstract public function insert(string $key, $value, string $type);
+    abstract public function insert(string $key, $value, string $type): mixed;
 
     /**
      * Update given key.
@@ -73,5 +73,5 @@ abstract class Driver implements DriverContract
      *
      * @return mixed
      */
-    abstract public function update(string $key, $value);
+    abstract public function update(string $key, $value): mixed;
 }

@@ -19,11 +19,9 @@ class TestCase extends BaseCase
     /**
      * DB configuration.
      */
-    const DB_HOST = 'mysql';
     const DB_NAME = 'dev';
     const DB_USERNAME = 'dev';
     const DB_PASSWORD = 'dev';
-    const DB_PREFIX = 'settings_';
 
     /**
      * Setup TestCase.
@@ -37,7 +35,7 @@ class TestCase extends BaseCase
         parent::setUp();
 
         $this->artisan('migrate:refresh', [
-            '--database' => 'mysql',
+            '--database' => 'sqlite',
             '--realpath' => realpath(__DIR__.'/../database/migrations'),
         ]);
     }
@@ -64,18 +62,7 @@ class TestCase extends BaseCase
     protected function getEnvironmentSetUp($app) : void
     {
         $app['path.base'] = __DIR__.'/..';
-        $app['config']->set('database.default', 'mysql');
-        $app['config']->set('database.connections.mysql', [
-            'driver'    => 'mysql',
-            'host'      => static::DB_HOST,
-            'database'  => static::DB_NAME,
-            'username'  => static::DB_USERNAME,
-            'password'  => static::DB_PASSWORD,
-            'charset'   => 'utf8',
-            'collation' => 'utf8_unicode_ci',
-            'strict'    => true,
-            'prefix'    => static::DB_PREFIX,
-        ]);
+        $app['config']->set('database.default', 'sqlite');
         $app['config']->set('app.faker_locale', 'pl_PL');
     }
 
@@ -107,7 +94,7 @@ class TestCase extends BaseCase
             'drivers' => [
                 'database' => [
                     'class'      => \Mrluke\Settings\Drivers\Database::class,
-                    'connection' => 'mysql',
+                    'connection' => 'sqlite',
                     'table'      => 'settings',
                 ],
                 'json' => [

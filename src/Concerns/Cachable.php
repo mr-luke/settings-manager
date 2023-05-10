@@ -3,6 +3,7 @@
 namespace Mrluke\Settings\Concerns;
 
 use Closure;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 
 /**
@@ -19,14 +20,14 @@ trait Cachable
      *
      * @var bool
      */
-    protected $cache;
+    protected bool $cache;
 
     /**
      * Lifetime of cache in minutes.
      *
      * @var int
      */
-    protected $lifetime;
+    protected int $lifetime;
 
     /**
      * Flush settings from cache.
@@ -60,7 +61,7 @@ trait Cachable
      */
     public function getCacheLifetime() : int
     {
-        return (int) $this->lifetime;
+        return $this->lifetime;
     }
 
     /**
@@ -70,7 +71,7 @@ trait Cachable
      *
      * @return \Illuminate\Support\Collection
      */
-    public function getFromCache(Closure $callable)
+    public function getFromCache(Closure $callable): Collection
     {
         return Cache::remember($this->getCacheIdentifier(), $this->getCacheLifetime(), $callable);
     }
@@ -82,7 +83,7 @@ trait Cachable
      */
     public function isCacheEnabled() : bool
     {
-        return (bool) $this->cache;
+        return $this->cache;
     }
 
     /**
@@ -95,6 +96,6 @@ trait Cachable
     public function setCache(array $config) : void
     {
         $this->cache = $config['cache'];
-        $this->lifetime = $config['lifetime'];
+        $this->lifetime = (int) $config['lifetime'];
     }
 }

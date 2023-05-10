@@ -4,10 +4,10 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Deafult Bag name
+    | Default Bag name
     |--------------------------------------------------------------------------
     |
-    | This config is use to determine defult Bag (string).
+    | This config is use to determine default Bag (string).
     |
     */
 
@@ -53,7 +53,7 @@ return [
 
         'database' => [
             'class'      => \Mrluke\Settings\Drivers\Database::class,
-            'connection' => 'mysql',
+            'connection' => env('SETTINGS_CONNECTION', 'mysql'),
             'table'      => 'settings',
         ],
 

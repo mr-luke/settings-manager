@@ -3,6 +3,7 @@
 namespace Mrluke\Settings\Contracts;
 
 use Closure;
+use Illuminate\Support\Collection;
 
 /**
  * Cachable interface for SettingsManager.
@@ -43,7 +44,7 @@ interface Cachable
      *
      * @return \Illuminate\Support\Collection
      */
-    public function getFromCache(Closure $callable);
+    public function getFromCache(Closure $callable): Collection;
 
     /**
      * Determine if cache option is enabled.
