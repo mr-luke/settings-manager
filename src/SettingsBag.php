@@ -12,9 +12,6 @@ use Mrluke\Settings\Contracts\Driver;
  * @author    Łukasz Sitnicki (mr-luke)
  *
  * @link      http://github.com/mr-luke/settings-manager
- *
- * @version   1.0
- *
  * @license   MIT
  */
 final class SettingsBag implements Bag
@@ -24,35 +21,35 @@ final class SettingsBag implements Bag
      *
      * @var array
      */
-    protected $bag;
+    protected array $bag;
 
     /**
      * Driver use to interact with settings storage.
      *
      * @var \Mrluke\Settings\Contracts\Driver
      */
-    protected $driver;
+    protected Driver $driver;
 
     /**
      * Determine if driver already loaded data.
      *
      * @var bool
      */
-    protected $loaded = false;
+    protected bool $loaded = false;
 
     /**
      * Name of a Bag.
      *
      * @var string
      */
-    public $name;
+    public string $name;
 
     /**
      * List of allowed types.
      *
      * @var array
      */
-    protected $types = ['array', 'bool', 'boolean', 'double', 'float', 'integer', 'json', 'string'];
+    protected array $types = ['array', 'bool', 'boolean', 'double', 'float', 'integer', 'json', 'string'];
 
     public function __construct(Driver $driver, string $name)
     {
@@ -78,10 +75,10 @@ final class SettingsBag implements Bag
      * Return setting of given key.
      *
      * @param string $key
-     *
+     * @param null   $default
      * @return mixed
      */
-    public function get(string $key, $default = null)
+    public function get(string $key, $default = null): mixed
     {
         // In case where not loaded yet.
         if (!$this->loaded) {
@@ -97,9 +94,9 @@ final class SettingsBag implements Bag
      * @param string $key
      * @param mixed  $value
      * @param string $type
-     * @param mixed
+     * @return mixed
      */
-    public function register(string $key, $value, string $type)
+    public function register(string $key, $value, string $type): mixed
     {
         if (!in_array($type, $this->types)) {
             throw new InvalidArgumentException(

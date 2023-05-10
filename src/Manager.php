@@ -12,9 +12,6 @@ use Mrluke\Settings\Contracts\Bag;
  * @author    Łukasz Sitnicki (mr-luke)
  *
  * @link      http://github.com/mr-luke/settings-manager
- *
- * @version   1.0
- *
  * @license   MIT
  */
 class Manager
@@ -24,14 +21,14 @@ class Manager
      *
      * @var array
      */
-    private $bags = [];
+    private array $bags = [];
 
     /**
      * Raw collection of settings.
      *
      * @var \Mrluke\Configuration\Host
      */
-    private $config;
+    private Host $config;
 
     public function __construct(Host $configuration)
     {
