@@ -24,7 +24,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @license   MIT
  */
-class UnitTests extends TestCase
+class UnitsTest extends TestCase
 {
     use MockeryPHPUnitIntegration;
 
