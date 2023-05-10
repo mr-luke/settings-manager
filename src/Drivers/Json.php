@@ -23,7 +23,7 @@ class Json extends Driver
      *
      * @var array
      */
-    protected array $raw;
+    protected array $raw = [];
 
     public function __construct(array $config, string $bagName, array $bagConfig)
     {

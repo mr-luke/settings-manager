@@ -53,7 +53,7 @@ return [
 
         'database' => [
             'class'      => \Mrluke\Settings\Drivers\Database::class,
-            'connection' => 'mysql',
+            'connection' => env('SETTINGS_CONNECTION', 'mysql'),
             'table'      => 'settings',
         ],
 

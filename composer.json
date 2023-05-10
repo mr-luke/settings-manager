@@ -4,6 +4,7 @@
     "keywords": ["settings", "manager", "laravel"],
     "type": "library",
     "license": "MIT",
+    "version": "2.0.0",
     "authors": [
         {
             "name": "Łukasz Sitnicki",

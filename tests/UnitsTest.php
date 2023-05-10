@@ -71,7 +71,7 @@ class UnitsTest extends TestCase
             'drivers' => [
                 'database' => [
                     'class'      => Database::class,
-                    'connection' => 'mysql',
+                    'connection' => 'sqlite',
                     'table'      => 'settings',
                 ],
             ],

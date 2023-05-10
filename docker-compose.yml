@@ -3,27 +3,8 @@ services:
   php:
     image: movecloser/php:8.1-full
     environment:
-      DB_CONNECTION: mysql
-      DB_HOST: mysql
-      DB_NAME: dev
-      DB_USER: dev
-      DB_PASS: dev
-    depends_on:
-      - mysql
+      DB_CONNECTION: "sqlite"
+      SETTINGS_CONNECTION: "sqlite"
+      DB_NAME: ":memory:"
     volumes:
       - .:/var/www:rw,cached
-  mysql:
-    image: mariadb:latest
-    environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: dev
-      MYSQL_USER: dev
-      MYSQL_PASSWORD: dev
-    ports:
-      - "3308:3306"
-    volumes:
-      - dbdata:/var/lib/mysql
-    command: mysqld --sql_mode=""
-volumes:
-  dbdata:
-    driver: local

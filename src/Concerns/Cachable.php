@@ -96,6 +96,6 @@ trait Cachable
     public function setCache(array $config) : void
     {
         $this->cache = $config['cache'];
-        $this->lifetime = $config['lifetime'];
+        $this->lifetime = (int) $config['lifetime'];
     }
 }
