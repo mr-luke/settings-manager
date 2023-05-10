@@ -9,7 +9,7 @@ jobs:
     name: Run php-unit
     runs-on: ubuntu-latest
     container:
-      image: kirschbaumdevelopment/laravel-test-runner:8.0
+      image: kirschbaumdevelopment/laravel-test-runner:8.1
 
     steps:
     - name: Checkout
