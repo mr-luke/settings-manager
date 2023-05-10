@@ -103,10 +103,10 @@ final class SettingsBag implements Bag
                 sprintf('Given %s type is not allowed.', $type)
             );
         }
-        if ($type == 'boolean') {
+        if ($type === 'boolean') {
             $type = 'bool';
         }
-        if ($type == 'double') {
+        if ($type === 'double') {
             $type = 'float';
         }
 
@@ -120,9 +120,9 @@ final class SettingsBag implements Bag
      *
      * @param string $key
      * @param mixed  $value
-     * @param mixed
+     * @return mixed
      */
-    public function set(string $key, $value)
+    public function set(string $key, $value): mixed
     {
         // In case where not loaded yet.
         if (!$this->loaded) {
