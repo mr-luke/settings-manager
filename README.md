@@ -29,7 +29,7 @@ To install through composer, simply put the following in your composer.json file
 ```json
 {
     "require": {
-        "mr-luke/settings-manager": "~1.0"
+        "mr-luke/settings-manager": "~2.0"
     }
 }
 ```
