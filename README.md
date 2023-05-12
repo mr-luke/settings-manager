@@ -4,7 +4,10 @@ Settings Manager - Laravel multibag settings Package.
 [![Latest Stable Version](https://poser.pugx.org/mr-luke/settings-manager/v/stable)](https://packagist.org/packages/mr-luke/settings-manager)
 [![Total Downloads](https://poser.pugx.org/mr-luke/settings-manager/downloads)](https://packagist.org/packages/mr-luke/settings-manager)
 [![License](https://poser.pugx.org/mr-luke/settings-manager/license)](https://packagist.org/packages/mr-luke/settings-manager)
+
+![Tests Workflow](https://github.com/mr-luke/settings-manager/actions/workflows/run-testsuit.yaml/badge.svg)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=mr-luke_settings-manager&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=mr-luke_settings-manager)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=mr-luke_settings-manager&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=mr-luke_settings-manager)
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=mr-luke_settings-manager&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=mr-luke_settings-manager)
 
 This package provides settings manamgement to your Laravel app with support of multiple setting bags with typed value.
